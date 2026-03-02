@@ -255,6 +255,15 @@ animation:spin 1s linear infinite;
 100%{transform:rotate(360deg);}
 }
   
+#progress-bar{
+position:fixed;
+top:0;
+left:0;
+height:4px;
+width:0%;
+background:#00e5ff;
+z-index:4000;
+}
 </style>
 </head>
 
@@ -265,16 +274,6 @@ animation:spin 1s linear infinite;
 </div>
   
 <div id="progress-bar"></div>
-
-#progress-bar{
-position:fixed;
-top:0;
-left:0;
-height:4px;
-width:0%;
-background:#00e5ff;
-z-index:4000;
-}
   
 <nav>
 <div><strong>7 Oceans Resort</strong></div>
@@ -397,6 +396,12 @@ const scrollTop=document.documentElement.scrollTop;
 const height=document.documentElement.scrollHeight - document.documentElement.clientHeight;
 const progress=(scrollTop/height)*100;
 document.getElementById("progress-bar").style.width=progress+"%";
+
+if(window.scrollY > 50){
+nav.classList.add("scrolled");
+} else {
+nav.classList.remove("scrolled");
+}
 });
 
 window.addEventListener("load",()=>{
