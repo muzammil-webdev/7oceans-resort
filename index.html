@@ -7,11 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
 font-family:'Poppins',sans-serif;
@@ -20,11 +16,12 @@ color:white;
 scroll-behavior:smooth;
 }
 
+/* NAVIGATION */
 nav{
 position:fixed;
 width:100%;
 background:rgba(0,0,0,0.7);
-padding:15px 40px;
+padding:15px 50px;
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -36,31 +33,54 @@ color:white;
 text-decoration:none;
 margin-left:20px;
 font-weight:500;
+transition:0.3s;
 }
 
 nav a:hover{
 color:gold;
 }
 
+/* HERO SLIDER */
 header{
+position:relative;
 height:100vh;
-background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
+overflow:hidden;
 }
 
-header h1{
+.slider{
+position:absolute;
+width:100%;
+height:100%;
+}
+
+.slides{
+display:none;
+height:100vh;
+}
+
+.slides img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.hero-content{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+z-index:2;
+}
+
+.hero-content h1{
 font-family:'Playfair Display',serif;
-font-size:48px;
+font-size:52px;
 margin-bottom:20px;
 }
 
-header p{
-font-size:18px;
+.hero-content p{
+font-size:20px;
 margin-bottom:25px;
 }
 
@@ -73,6 +93,7 @@ font-weight:bold;
 border-radius:5px;
 }
 
+/* SECTIONS */
 section{
 padding:80px 20px;
 max-width:1100px;
@@ -96,8 +117,14 @@ gap:25px;
 background:#1b263b;
 padding:30px;
 border-radius:10px;
+transition:0.3s;
 }
 
+.card:hover{
+transform:translateY(-10px);
+}
+
+/* GALLERY */
 .gallery{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -109,12 +136,28 @@ width:100%;
 border-radius:10px;
 }
 
+/* CONTACT */
+form{
+display:grid;
+gap:15px;
+max-width:500px;
+margin:auto;
+}
+
+input,textarea{
+padding:12px;
+border:none;
+border-radius:6px;
+}
+
+/* FOOTER */
 footer{
 background:black;
 padding:20px;
 text-align:center;
 }
 
+/* WHATSAPP BUTTON */
 .whatsapp{
 position:fixed;
 bottom:20px;
@@ -142,29 +185,40 @@ font-size:22px;
 </nav>
 
 <header>
-<h1>Experience Coastal Luxury</h1>
-<p>Your Perfect Weekend Escape in Palghar</p>
-<a href="#contact" class="btn">Book Now</a>
+<div class="slider">
+<div class="slides">
+<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+</div>
+<div class="slides">
+<img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4">
+</div>
+<div class="slides">
+<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb">
+</div>
+</div>
+
+<div class="hero-content">
+<h1>Luxury Beachside Escape</h1>
+<p>Premium Villas • Private Events • Coastal Serenity</p>
+<a href="#contact" class="btn">Book Your Stay</a>
+</div>
 </header>
 
 <section id="about">
 <h2>About Us</h2>
-<p>
-Located near Satpati Beach, 7 Oceans Resort offers elegant villas,
-serene ocean views, and the perfect escape from city life.
-</p>
+<p>Located near Satpati Beach, 7 Oceans Resort offers elegant villas and peaceful coastal luxury perfect for weekend escapes from Mumbai.</p>
 </section>
 
 <section id="stay">
-<h2>Our Stay Experience</h2>
+<h2>Stay Experience</h2>
 <div class="grid">
 <div class="card">
 <h3>Luxury Villas</h3>
 <p>Spacious AC villas with premium comfort.</p>
 </div>
 <div class="card">
-<h3>Beachside Serenity</h3>
-<p>Wake up to calming ocean breeze.</p>
+<h3>Ocean Views</h3>
+<p>Wake up to calming sea breeze and sunsets.</p>
 </div>
 <div class="card">
 <h3>Private Events</h3>
@@ -177,16 +231,19 @@ serene ocean views, and the perfect escape from city life.
 <h2>Gallery</h2>
 <div class="gallery">
 <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
-<img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4">
 <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb">
+<img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4">
 </div>
 </section>
 
 <section id="contact">
 <h2>Book Your Stay</h2>
-<p>Call or WhatsApp us for direct booking.</p>
-<br>
-<a href="tel:+919021512392" class="btn">Call Now</a>
+<form action="https://formsubmit.co/youremail@gmail.com" method="POST">
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<textarea name="message" rows="4" placeholder="Your Message"></textarea>
+<button class="btn" type="submit">Send Enquiry</button>
+</form>
 </section>
 
 <footer>
@@ -194,6 +251,21 @@ serene ocean views, and the perfect escape from city life.
 </footer>
 
 <a href="https://wa.me/919021512392" class="whatsapp">💬</a>
+
+<script>
+let slideIndex = 0;
+showSlides();
+function showSlides(){
+let slides=document.getElementsByClassName("slides");
+for(let i=0;i<slides.length;i++){
+slides[i].style.display="none";
+}
+slideIndex++;
+if(slideIndex>slides.length){slideIndex=1}
+slides[slideIndex-1].style.display="block";
+setTimeout(showSlides,4000);
+}
+</script>
 
 </body>
 </html>
