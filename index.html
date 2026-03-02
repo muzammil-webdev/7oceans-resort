@@ -90,7 +90,8 @@ section{
 padding:100px 8%;
 opacity:0;
 transform:translateY(60px);
-transition:all 0.8s ease;
+transition:opacity 0.8s ease, transform 0.8s ease;
+will-change: opacity, transform;
 }
 
 section.active{
@@ -294,14 +295,20 @@ style="border:0;border-radius:20px;">
 <a href="https://wa.me/919021512392" class="whatsapp">💬</a>
 
 <script>
-const sections=document.querySelectorAll("section");
-window.addEventListener("scroll",()=>{
-sections.forEach(sec=>{
-const rect=sec.getBoundingClientRect();
-if(rect.top<window.innerHeight-80){
-sec.classList.add("active");
-}
+const sections = document.querySelectorAll("section");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add("active");
+    }
+  });
+}, {
+  threshold: 0.15
 });
+
+sections.forEach(section => {
+  observer.observe(section);
 });
 </script>
 
