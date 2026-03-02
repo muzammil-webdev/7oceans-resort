@@ -3,54 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>7 Oceans Resort | Coastal Luxury in Palghar</title>
+<title>7 Oceans Resort | Coastal Luxury</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-font-family:'Montserrat',sans-serif;
-background:#0f172a;
+font-family:'Inter',sans-serif;
+background:#0a0f1c;
 color:white;
 overflow-x:hidden;
 }
 
-/* NAVBAR */
+/* NAV */
 nav{
 position:fixed;
 width:100%;
-padding:20px 60px;
+padding:25px 8%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:rgba(0,0,0,0.4);
-backdrop-filter:blur(10px);
+background:rgba(0,0,0,0.3);
+backdrop-filter:blur(12px);
 z-index:1000;
+transition:0.3s;
 }
 
 nav a{
 color:white;
 text-decoration:none;
-margin-left:30px;
+margin-left:35px;
 font-weight:500;
+letter-spacing:1px;
 transition:0.3s;
 }
 
 nav a:hover{
-color:#38bdf8;
+color:#00e5ff;
 }
 
-/* HERO */
+/* HERO PARALLAX */
 .hero{
 height:100vh;
-background:linear-gradient(to bottom,rgba(0,0,0,0.6),rgba(0,0,0,0.8)),
-url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover;
+background:
+linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.8)),
+url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover fixed;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -60,127 +59,137 @@ padding:20px;
 }
 
 .hero h1{
-font-size:60px;
-font-weight:700;
+font-size:72px;
+font-weight:800;
 letter-spacing:2px;
 margin-bottom:20px;
+animation:fadeUp 1.5s ease forwards;
 }
 
 .hero p{
-font-size:20px;
-margin-bottom:30px;
-color:#e2e8f0;
+font-size:22px;
+margin-bottom:40px;
+color:#cbd5e1;
+animation:fadeUp 2s ease forwards;
 }
 
 .btn{
-background:#38bdf8;
+background:#00e5ff;
 color:black;
-padding:14px 35px;
+padding:16px 40px;
+border-radius:40px;
 text-decoration:none;
 font-weight:600;
-border-radius:30px;
 transition:0.3s;
 }
 
 .btn:hover{
+transform:scale(1.1);
 background:white;
-transform:scale(1.05);
 }
 
 /* SECTION */
 section{
-padding:100px 60px;
+padding:120px 10%;
+opacity:0;
+transform:translateY(80px);
+transition:all 1s ease;
+}
+
+section.active{
+opacity:1;
+transform:translateY(0);
 }
 
 .section-title{
-font-size:40px;
-margin-bottom:60px;
+font-size:48px;
+margin-bottom:80px;
 text-align:center;
+font-weight:700;
 }
 
+/* CARDS */
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:30px;
+gap:40px;
 }
 
 .card{
 background:rgba(255,255,255,0.05);
-backdrop-filter:blur(10px);
-padding:40px;
-border-radius:20px;
-transition:0.4s;
+padding:50px;
+border-radius:25px;
 border:1px solid rgba(255,255,255,0.1);
+backdrop-filter:blur(20px);
+transition:0.4s;
 }
 
 .card:hover{
-transform:translateY(-15px);
-background:rgba(255,255,255,0.1);
-}
-
-.card h3{
-margin-bottom:20px;
-font-size:22px;
+transform:translateY(-20px);
+background:rgba(255,255,255,0.08);
 }
 
 /* GALLERY */
 .gallery{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:30px;
 }
 
 .gallery img{
 width:100%;
-height:250px;
+height:350px;
 object-fit:cover;
-border-radius:20px;
-transition:0.4s;
+border-radius:25px;
+transition:0.6s;
 }
 
 .gallery img:hover{
-transform:scale(1.05);
+transform:scale(1.08);
 }
 
 /* CONTACT */
-.contact{
-text-align:center;
-}
-
 .contact form{
 display:flex;
 flex-direction:column;
-max-width:500px;
+max-width:600px;
 margin:0 auto;
-gap:20px;
+gap:25px;
 }
 
 .contact input,
 .contact textarea{
-padding:15px;
+padding:18px;
+border-radius:12px;
 border:none;
-border-radius:10px;
+font-size:16px;
 }
 
 footer{
 background:#020617;
 text-align:center;
-padding:30px;
-margin-top:50px;
+padding:40px;
+margin-top:80px;
 }
 
 /* WHATSAPP */
 .whatsapp{
 position:fixed;
-bottom:25px;
-right:25px;
+bottom:30px;
+right:30px;
 background:#25D366;
 color:white;
-padding:18px;
+padding:20px;
 border-radius:50%;
-font-size:22px;
+font-size:24px;
 text-decoration:none;
-box-shadow:0 0 20px rgba(0,0,0,0.5);
+box-shadow:0 0 25px rgba(0,0,0,0.5);
+}
+
+/* ANIMATION */
+@keyframes fadeUp{
+from{opacity:0; transform:translateY(50px);}
+to{opacity:1; transform:translateY(0);}
 }
 </style>
 </head>
@@ -199,30 +208,30 @@ box-shadow:0 0 20px rgba(0,0,0,0.5);
 
 <div class="hero">
 <h1>Coastal Luxury Redefined</h1>
-<p>Your Premium Beachside Escape in Palghar</p>
-<a href="#contact" class="btn">Book Your Stay</a>
+<p>Where Serenity Meets the Sea</p>
+<a href="#contact" class="btn">Reserve Your Escape</a>
 </div>
 
 <section id="about">
-<h2 class="section-title">About The Resort</h2>
+<h2 class="section-title">The Experience</h2>
 <div class="cards">
 <div class="card">
 <h3>Luxury Villas</h3>
-<p>Spacious air-conditioned villas designed for comfort and elegance.</p>
+<p>Architecturally designed villas offering comfort, privacy and elegance.</p>
 </div>
 <div class="card">
-<h3>Ocean Serenity</h3>
-<p>Wake up to calming sea breeze and breathtaking sunsets.</p>
+<h3>Oceanfront Calm</h3>
+<p>Wake up to sea breeze and golden sunsets over the horizon.</p>
 </div>
 <div class="card">
-<h3>Private Events</h3>
-<p>Perfect venue for birthdays, corporate retreats and celebrations.</p>
+<h3>Celebrations</h3>
+<p>Perfect destination for private events and memorable moments.</p>
 </div>
 </div>
 </section>
 
 <section id="gallery">
-<h2 class="section-title">Experience The View</h2>
+<h2 class="section-title">Moments at 7 Oceans</h2>
 <div class="gallery">
 <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
 <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4">
@@ -231,20 +240,32 @@ box-shadow:0 0 20px rgba(0,0,0,0.5);
 </section>
 
 <section id="contact" class="contact">
-<h2 class="section-title">Book Your Stay</h2>
+<h2 class="section-title">Begin Your Journey</h2>
 <form action="https://formsubmit.co/youremail@gmail.com" method="POST">
 <input type="text" name="name" placeholder="Your Name" required>
 <input type="email" name="email" placeholder="Your Email" required>
-<textarea name="message" rows="4" placeholder="Your Message"></textarea>
+<textarea name="message" rows="5" placeholder="Your Message"></textarea>
 <button class="btn" type="submit">Send Enquiry</button>
 </form>
 </section>
 
 <footer>
-<p>© 2026 7 Oceans Resort | Palghar, Maharashtra</p>
+<p>© 2026 7 Oceans Resort | Palghar</p>
 </footer>
 
 <a href="https://wa.me/919021512392" class="whatsapp">💬</a>
+
+<script>
+const sections=document.querySelectorAll("section");
+window.addEventListener("scroll",()=>{
+sections.forEach(sec=>{
+const rect=sec.getBoundingClientRect();
+if(rect.top<window.innerHeight-100){
+sec.classList.add("active");
+}
+});
+});
+</script>
 
 </body>
 </html>
