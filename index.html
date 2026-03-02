@@ -10,6 +10,10 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
+html{
+scroll-behavior:smooth;
+}
+  
 body{
 font-family:'Inter',sans-serif;
 background:#0a0f1c;
@@ -31,12 +35,34 @@ backdrop-filter:blur(10px);
 z-index:1000;
 }
 
+nav.scrolled{
+background:rgba(0,0,0,0.9);
+box-shadow:0 10px 30px rgba(0,0,0,0.6);
+padding:15px 8%;
+transition:0.3s;
+}
+  
 nav a{
+position:relative;
 color:white;
 text-decoration:none;
 margin-left:25px;
 font-weight:500;
+}
+
+nav a::after{
+content:"";
+position:absolute;
+width:0%;
+height:2px;
+bottom:-6px;
+left:0;
+background:#00e5ff;
 transition:0.3s;
+}
+
+nav a:hover::after{
+width:100%;
 }
 
 nav a:hover{
@@ -118,7 +144,9 @@ background:rgba(255,255,255,0.05);
 padding:40px;
 border-radius:20px;
 border:1px solid rgba(255,255,255,0.1);
-transition:0.3s;
+transition:0.4s;
+opacity:0;
+transform:translateY(40px);
 }
 
 .card:hover{
@@ -202,7 +230,7 @@ margin:8px;
 </head>
 
 <body>
-
+<div id="progress-bar"></div>
 <nav>
 <div><strong>7 Oceans Resort</strong></div>
 <div>
@@ -300,6 +328,14 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if(entry.isIntersecting){
       entry.target.classList.add("active");
+
+const cards = entry.target.querySelectorAll(".card");
+cards.forEach((card,index)=>{
+setTimeout(()=>{
+card.style.opacity="1";
+card.style.transform="translateY(0)";
+}, index * 150);
+});
     }
   });
 }, {
@@ -308,6 +344,14 @@ const observer = new IntersectionObserver(entries => {
 
 sections.forEach(section => {
   observer.observe(section);
+});
+const nav = document.querySelector("nav");
+
+window.addEventListener("scroll",()=>{
+const scrollTop=document.documentElement.scrollTop;
+const height=document.documentElement.scrollHeight - document.documentElement.clientHeight;
+const progress=(scrollTop/height)*100;
+document.getElementById("progress-bar").style.width=progress+"%";
 });
 </script>
 
