@@ -24,6 +24,7 @@ background:#0a0f1c;
 color:white;
 overflow-x:hidden;
 line-height:1.6;
+scroll-padding-top:100px;  
 }
 
 /* NAV */
@@ -75,7 +76,7 @@ color:#00e5ff;
 
 /* HERO */
 .hero{
-height:100vh;
+height:calc(100vh - 80px);
 margin-top:80px;  
 background:
 linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.8)),
@@ -109,14 +110,14 @@ text-decoration:none;
 font-weight:600;
 display:inline-block;
 transition:all 0.3s ease;
-box-shadow:0 8px 20px rgba(0,229,255,0.25);
+box-shadow:0 10px 25px rgba(0,229,255,0.35);
 position:relative;
 overflow:hidden;
 }
 
 .btn:hover{
 transform:translateY(-3px) scale(1.05);
-box-shadow:0 15px 35px rgba(0,229,255,0.5);
+box-shadow:0 20px 45px rgba(0,229,255,0.6);
 background:linear-gradient(135deg,#ffffff,#e0f7fa);
 }
 
@@ -198,6 +199,12 @@ border:none;
 font-size:16px;
 }
 
+.contact input:focus,
+.contact textarea:focus{
+outline:none;
+box-shadow:0 0 12px rgba(0,229,255,0.6);
+}
+  
 /* FOOTER */
 footer{
 background:#020617;
