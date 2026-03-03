@@ -389,9 +389,9 @@ Chat on WhatsApp
 <section id="gallery">
 <h2 class="section-title">Moments at 7 Oceans</h2>
 <div class="gallery">
-<img src="VILLA.jpg.jpg" loading="lazy">
-<img src="LAWN.jpg.jpg" loading="lazy">
-<img src="POOL.jpg.jpg" loading="lazy">
+<img src="VILLA.jpg.jpg" loading="lazy" onclick="openLightbox(this.src)">
+<img src="LAWN.jpg.jpg" loading="lazy" onclick="openLightbox(this.src)">
+<img src="POOL.jpg.jpg" loading="lazy" onclick="openLightbox(this.src)">
 </div>
 </section>
 
@@ -431,6 +431,11 @@ style="border:0;border-radius:20px;">
 
 <a href="https://wa.me/919021512392" class="whatsapp">💬</a>
 
+<div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:5000;">
+  <span onclick="closeLightbox()" style="position:absolute;top:30px;right:40px;font-size:40px;color:white;cursor:pointer;">&times;</span>
+  <img id="lightbox-img" src="" style="max-width:90%;max-height:80%;border-radius:20px;">
+</div>
+  
 <script>
 const sections = document.querySelectorAll("section");
 
@@ -478,6 +483,15 @@ setTimeout(()=>{
 loader.style.display="none";
 },500);
 });
+
+function openLightbox(src){
+  document.getElementById("lightbox").style.display = "flex";
+  document.getElementById("lightbox-img").src = src;
+}
+
+function closeLightbox(){
+  document.getElementById("lightbox").style.display = "none";
+}  
 </script>
 
 </body>
