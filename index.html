@@ -211,6 +211,22 @@ cursor:pointer;
 box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
+.gallery-card{
+  cursor:pointer;
+  text-align:center;
+  transition:0.3s;
+}
+
+.gallery-card p{
+  margin-top:10px;
+  font-weight:600;
+  color:#00bcd4;
+}
+
+.gallery-card:hover{
+  transform:translateY(-5px);
+}
+
 .gallery img:hover{
 transform:scale(1.05);
 }
@@ -484,9 +500,22 @@ Chat on WhatsApp
 <h2 class="section-title">Moments at 7 Oceans</h2>
 
 <div class="gallery">
-<img src="VILLA.jpg.jpg" loading="lazy" onclick="openGallery(this)">
-<img src="LAWN.jpg.jpg" loading="lazy" onclick="openGallery(this)">
-<img src="POOL.jpg.jpg" loading="lazy" onclick="openGallery(this)">
+
+<div class="gallery-card" onclick="openGallerySet('villa')">
+  <img src="VILLA.jpg.jpg" loading="lazy">
+  <p>Luxury Floating Villa</p>
+</div>
+
+<div class="gallery-card" onclick="openGallerySet('garden')">
+  <img src="LAWN.jpg.jpg" loading="lazy">
+  <p>Garden View Experience</p>
+</div>
+
+<div class="gallery-card" onclick="openGallerySet('property')">
+  <img src="POOL.jpg.jpg" loading="lazy">
+  <p>Full Property Booking</p>
+</div>
+
 </div>
 </section>
 
@@ -527,7 +556,13 @@ style="border:0;border-radius:20px;">
 <!-- Premium Gallery Popup -->
 <div id="galleryModal" class="gallery-modal">
   <span class="gallery-close" onclick="closeGallery()">&times;</span>
-  <img id="galleryImage" class="gallery-modal-img">
+  <div class="modal-content">
+    <img id="galleryImage" class="gallery-modal-img">
+    <div class="modal-controls">
+      <button onclick="prevImage()">‹</button>
+      <button onclick="nextImage()">›</button>
+    </div>
+  </div>
 </div>
   
 <script>
@@ -578,9 +613,30 @@ loader.style.display="none";
 },500);
 });
 
-function openGallery(img){
+let currentImages = [];
+let currentIndex = 0;
+
+const imageSets = {
+  villa: ["VILLA.jpg.jpg", "VILLA2.jpg", "VILLA3.jpg"],
+  garden: ["LAWN.jpg.jpg", "LAWN2.jpg", "LAWN3.jpg"],
+  property: ["POOL.jpg.jpg", "POOL2.jpg", "POOL3.jpg"]
+};
+
+function openGallerySet(type){
+  currentImages = imageSets[type];
+  currentIndex = 0;
+  document.getElementById("galleryImage").src = currentImages[currentIndex];
   document.getElementById("galleryModal").style.display = "flex";
-  document.getElementById("galleryImage").src = img.src;
+}
+
+function nextImage(){
+  currentIndex = (currentIndex + 1) % currentImages.length;
+  document.getElementById("galleryImage").src = currentImages[currentIndex];
+}
+
+function prevImage(){
+  currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+  document.getElementById("galleryImage").src = currentImages[currentIndex];
 }
 
 function closeGallery(){
