@@ -286,6 +286,35 @@ width:0%;
 background:#00e5ff;
 z-index:4000;
 }
+
+#sticky-booking{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#00e5ff;
+color:black;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 8%;
+font-weight:600;
+z-index:2000;
+box-shadow:0 -5px 20px rgba(0,0,0,0.4);
+}
+
+#sticky-booking a{
+background:black;
+color:white;
+padding:10px 20px;
+border-radius:30px;
+text-decoration:none;
+transition:0.3s;
+}
+
+#sticky-booking a:hover{
+background:#222;
+}  
 </style>
 </head>
 
@@ -434,6 +463,11 @@ style="border:0;border-radius:20px;">
 <div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:5000;">
   <span onclick="closeLightbox()" style="position:absolute;top:30px;right:40px;font-size:40px;color:white;cursor:pointer;">&times;</span>
   <img id="lightbox-img" src="" style="max-width:90%;max-height:80%;border-radius:20px;">
+</div>
+
+<div id="sticky-booking">
+  <span>Ready to Plan Your Stay?</span>
+  <a href="#contact">Check Availability</a>
 </div>
   
 <script>
