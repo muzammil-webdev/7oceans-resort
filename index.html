@@ -333,7 +333,48 @@ color:white;
 .logo img{
 height:38px;
 width:auto;
-}  
+}
+
+.gallery-modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.95);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.gallery-modal-img{
+  max-width:90%;
+  max-height:85%;
+  border-radius:20px;
+  box-shadow:0 30px 80px rgba(0,0,0,0.8);
+  animation:zoomIn 0.3s ease;
+}
+
+.gallery-close{
+  position:absolute;
+  top:30px;
+  right:40px;
+  font-size:45px;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.gallery-close:hover{
+  color:#00bcd4;
+  transform:scale(1.2);
+}
+
+@keyframes zoomIn{
+  from{transform:scale(0.85);}
+  to{transform:scale(1);}
+}
 </style>
 </head>
 
@@ -441,22 +482,15 @@ Chat on WhatsApp
   
 <section id="gallery">
 <h2 class="section-title">Moments at 7 Oceans</h2>
+
 <div class="gallery">
-<a href="VILLA.jpg.jpg" target="_blank">
-  <img src="VILLA.jpg.jpg" loading="lazy">
-</a>
-
-<a href="LAWN.jpg.jpg" target="_blank">
-  <img src="LAWN.jpg.jpg" loading="lazy">
-</a>
-
-<a href="POOL.jpg.jpg" target="_blank">
-  <img src="POOL.jpg.jpg" loading="lazy">
-</a>
+<img src="VILLA.jpg.jpg" loading="lazy" onclick="openGallery(this)">
+<img src="LAWN.jpg.jpg" loading="lazy" onclick="openGallery(this)">
+<img src="POOL.jpg.jpg" loading="lazy" onclick="openGallery(this)">
 </div>
 </section>
 
-<section id="trust">
+<section id="trust-proof">
 <h2 class="section-title">Trusted by Families & Corporate Groups</h2>
 <p style="text-align:center;max-width:700px;margin:0 auto;color:#cbd5e1;">
 Families, corporate teams and private groups regularly choose 7 Oceans Resort for exclusive celebrations, weekend escapes and peaceful coastal stays. Our serene setting and personalized hospitality make every visit memorable.
@@ -490,6 +524,12 @@ style="border:0;border-radius:20px;">
 <p>© 2026 All Rights Reserved</p>
 </footer>
 
+<!-- Premium Gallery Popup -->
+<div id="galleryModal" class="gallery-modal">
+  <span class="gallery-close" onclick="closeGallery()">&times;</span>
+  <img id="galleryImage" class="gallery-modal-img">
+</div>
+  
 <script>
 const sections = document.querySelectorAll("section");
 
@@ -536,6 +576,21 @@ loader.style.transition = "opacity 0.5s ease";
 setTimeout(()=>{
 loader.style.display="none";
 },500);
+});
+
+function openGallery(img){
+  document.getElementById("galleryModal").style.display = "flex";
+  document.getElementById("galleryImage").src = img.src;
+}
+
+function closeGallery(){
+  document.getElementById("galleryModal").style.display = "none";
+}
+
+window.addEventListener("keydown", function(e){
+  if(e.key === "Escape"){
+    closeGallery();
+  }
 });
 </script>
 
