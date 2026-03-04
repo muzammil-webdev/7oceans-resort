@@ -24,30 +24,21 @@ background:#061e2f;
 color:white;
 overflow-x:hidden;
 line-height:1.6;
-scroll-padding-top:100px;
-
-opacity:0;
-animation:pageReveal 1.2s ease forwards;
+scroll-padding-top:100px;  
 }
 
 /* NAV */
 nav{
 position:fixed;
-top:0;
-left:0;
 width:100%;
-padding:18px 8%;
+padding:20px 8%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-
-background:rgba(6,30,47,0.85);
-backdrop-filter:blur(18px);
-
-border-bottom:1px solid rgba(255,255,255,0.08);
-
-z-index:9999;
-transition:all 0.35s ease;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(10px);
+z-index:1000;
+transition:all 0.3s ease;  
 }
 
 nav.scrolled{
@@ -58,18 +49,14 @@ padding:15px 8%;
   
 nav a{
 position:relative;
-color:rgba(255,255,255,0.85);
+color:white;
 text-decoration:none;
 margin-left:35px;
 font-weight:600;
-letter-spacing:1px;
+letter-spacing:1.5px;
 text-transform:uppercase;
 font-size:14px;
 transition:all 0.3s ease;
-}
-
-nav a:hover{
-color:#00bcd4;
 }
 
 nav a::after{
@@ -103,44 +90,31 @@ justify-content:center;
 align-items:center;
 text-align:center;
 padding:20px;
-z-index:1;
-
-background:radial-gradient(circle at 30% 40%, rgba(0,188,212,0.15), transparent 60%);
-animation:heroLight 8s ease-in-out infinite alternate;
 }
 
-
-@keyframes heroLight{
-
-0%{
-background-position:30% 40%;
+.hero::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.8)),
+url('HERO2.jpg.jpeg') center/cover;
+z-index:-1;
+animation:heroZoom 12s ease-in-out infinite alternate;
 }
 
-100%{
-background-position:70% 60%;
-}
-
-}
-
-@keyframes pageReveal{
-
-0%{
-opacity:0;
-transform:translateY(10px);
-}
-
-100%{
-opacity:1;
-transform:translateY(0);
-}
-
+@keyframes heroZoom{
+0%{transform:scale(1);}
+100%{transform:scale(1.08);}
 }
 
 .hero h1{
 font-size:clamp(36px,6vw,72px);
 font-weight:800;
 margin-bottom:20px;
-text-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
 
 .hero p{
@@ -170,17 +144,15 @@ background:linear-gradient(135deg,#ffffff,#e0f7fa);
 }
 
 /* SECTION */
-/* SECTION */
-
-.section{
-padding:140px 8%;
+section{
+padding:120px 8%;
 opacity:0;
 transform:translateY(60px);
 transition:opacity 0.8s ease, transform 0.8s ease;
-will-change:opacity, transform;
+will-change: opacity, transform;
 }
 
-.section.active{
+section.active{
 opacity:1;
 transform:translateY(0);
 }
@@ -212,18 +184,15 @@ gap:30px;
 .card{
 background:rgba(255,255,255,0.05);
 padding:40px;
-border-radius:22px;
-border:1px solid rgba(255,255,255,0.08);
-transition:all 0.35s ease;
+border-radius:20px;
+border:1px solid rgba(255,255,255,0.1);
+transition:0.4s;
 opacity:0;
 transform:translateY(40px);
-box-shadow:0 10px 25px rgba(0,0,0,0.25);
 }
 
 .card:hover{
-transform:translateY(-12px) scale(1.02);
-box-shadow:0 25px 60px rgba(0,0,0,0.45);
-border-color:rgba(0,188,212,0.3);
+transform:translateY(-10px);
 }
 
 /* GALLERY */
@@ -237,14 +206,9 @@ gap:20px;
 width:100%;
 height:auto;
 border-radius:20px;
+transition:0.4s;
 cursor:pointer;
-box-shadow:0 15px 40px rgba(0,0,0,0.45);
-transition:transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.gallery-card:hover img{
-transform:scale(1.04);
-box-shadow:0 25px 60px rgba(0,0,0,0.6);
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
 .gallery-card{
@@ -254,19 +218,9 @@ box-shadow:0 25px 60px rgba(0,0,0,0.6);
 }
 
 .gallery-card p{
-  margin-top:14px;
-  font-size:16px;
+  margin-top:10px;
   font-weight:600;
-  letter-spacing:0.5px;
-  color:#ffffff;
-  text-align:center;
-  opacity:0.9;
-  transition:all 0.3s ease;
-}
-
-.gallery-card:hover p{
   color:#00bcd4;
-  opacity:1;
 }
 
 .gallery-card:hover{
@@ -410,33 +364,25 @@ width:auto;
   z-index:9999;
 }
 
-.modal-content{
-position:relative;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-}
-
-.gallery-close{
-position:absolute;
-top:-50px;
-right:-20px;
-font-size:40px;
-color:white;
-cursor:pointer;
-z-index:10000;
-}
-
 .gallery-modal-img{
   width:auto;
   height:auto;
   max-width:80vw;
   max-height:75vh;
-  object-fit:cover;
+  object-fit:contain;
   border-radius:20px;
   box-shadow:0 30px 80px rgba(0,0,0,0.8);
   animation:zoomIn 0.3s ease;
+}
+
+.gallery-close{
+  position:absolute;
+  top:30px;
+  right:40px;
+  font-size:45px;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
 }
 
 .gallery-close:hover{
@@ -448,142 +394,6 @@ z-index:10000;
   from{transform:scale(0.85);}
   to{transform:scale(1);}
 }
-
-.modal-controls{
-position:absolute;
-bottom:40px;
-left:50%;
-transform:translateX(-50%);
-display:flex;
-gap:18px;
-}
-
-.modal-controls button{
-width:50px;
-height:50px;
-border:none;
-border-radius:50%;
-background:rgba(255,255,255,0.15);
-color:white;
-font-size:22px;
-cursor:pointer;
-backdrop-filter:blur(10px);
-transition:all 0.3s ease;
-}
-
-.modal-controls button:hover{
-background:#00bcd4;
-transform:scale(1.15);
-}
-
-.whatsapp-float{
-position:fixed;
-bottom:25px;
-right:25px;
-width:60px;
-height:60px;
-border-radius:50%;
-background:#25D366;
-display:flex;
-align-items:center;
-justify-content:center;
-box-shadow:0 10px 30px rgba(0,0,0,0.35);
-z-index:10000;
-cursor:pointer;
-}
-
-.whatsapp-float img{
-width:28px;
-height:28px;
-filter:brightness(0) invert(1);
-}
-
-.whatsapp-float:hover{
-transform:scale(1.12);
-box-shadow:0 18px 55px rgba(0,0,0,0.5);
-}
-
-@keyframes whatsappFloat{
-0%{transform:translateY(0);}
-50%{transform:translateY(-6px);}
-100%{transform:translateY(0);}
-}
-
-/* HERO IMAGE SLIDER */
-
-.hero-slider{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-overflow:hidden;
-z-index:-1;
-}
-
-.hero-slider img{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-opacity:0;
-transition:opacity 1.5s ease;
-}
-
-.hero-slider img.active{
-opacity:1;
-}
-
-.hero-content{
-position:relative;
-z-index:2;
-text-align:center;
-max-width:900px;
-margin:auto;
-}
-
-/* REVIEWS */
-
-.reviews-slider{
-max-width:800px;
-margin:auto;
-text-align:center;
-position:relative;
-}
-
-.review{
-opacity:0;
-position:absolute;
-left:0;
-right:0;
-transition:opacity 1s ease;
-}
-
-.review.active{
-opacity:1;
-position:relative;
-}
-
-.review p{
-font-size:20px;
-line-height:1.6;
-color:#e2e8f0;
-margin-bottom:20px;
-}
-
-.review h4{
-color:#FFD700;
-margin-bottom:10px;
-font-size:22px;
-}
-
-.review span{
-color:#94a3b8;
-font-size:14px;
-}
-
 </style>
 </head>
 
@@ -611,25 +421,17 @@ font-size:14px;
 </nav>
 
 <div class="hero">
-
-<div class="hero-slider">
-
-<img src="HERO2.jpeg" class="slide active">
-<img src="HERO3.webp" class="slide">
-<img src="VILLAS.webp" class="slide">
-
-</div>
-
-<div class="hero-content">
-
 <h1>Stay at 7 Oceans Resort & Experience Coastal Luxury in Palghar</h1>
 
 <p>Private Beach House Villas • Perfect for Birthdays & Retreats • Direct Booking = Best Rates Guaranteed</p>
 
 <a href="#contact" class="btn">Check Availability Now</a>
 
-</div>
+<br><br>
 
+<a href="https://wa.me/919021512392?text=Hi%20I%20want%20to%20check%20availability%20at%207%20Oceans%20Resort" class="btn" style="background:#25D366;color:white;">
+Chat on WhatsApp
+</a>
 </div>
 
 <section id="about">
@@ -703,17 +505,17 @@ font-size:14px;
 <div class="gallery">
 
 <div class="gallery-card" onclick="openGallerySet('villa')">
-  <img src="VILLA.jpg" loading="lazy">
+  <img src="VILLA.jpg.jpg" loading="lazy">
   <p>Luxury Floating Villa</p>
 </div>
 
 <div class="gallery-card" onclick="openGallerySet('garden')">
-  <img src="LAWN.jpg" loading="lazy">
+  <img src="LAWN.jpg.jpg" loading="lazy">
   <p>Events & Entertainment</p>
 </div>
 
 <div class="gallery-card" onclick="openGallerySet('property')">
-  <img src="POOL.jpg" loading="lazy">
+  <img src="POOL.jpg.jpg" loading="lazy">
   <p>Swimming Pool Fun</p>
 </div>
 
@@ -726,35 +528,7 @@ font-size:14px;
 Families, corporate teams and private groups regularly choose 7 Oceans Resort for exclusive celebrations, weekend escapes and peaceful coastal stays. Our serene setting and personalized hospitality make every visit memorable.
 </p>
 </section>
-
-<section id="reviews">
-
-<h2 class="section-title">Guest Experiences</h2>
-
-<div class="reviews-slider">
-
-<div class="review active">
-<p>"Amazing stay! The villas are beautiful and the atmosphere is extremely peaceful. Perfect for weekend getaway."</p>
-<h4>★★★★★</h4>
-<span>– Google Guest Review</span>
-</div>
-
-<div class="review">
-<p>"Great place for birthday celebrations and family gatherings. Staff was very helpful and the property is stunning."</p>
-<h4>★★★★★</h4>
-<span>– Google Guest Review</span>
-</div>
-
-<div class="review">
-<p>"Loved the floating villas and the greenery around the resort. A hidden gem near Palghar."</p>
-<h4>★★★★★</h4>
-<span>– Google Guest Review</span>
-</div>
-
-</div>
-
-</section>
-
+  
 <section id="contact" class="contact">
 <h2 class="section-title">Begin Your Journey</h2>
 <form action="https://formsubmit.co/muzammilquraishi1786@gmail.com" method="POST">
@@ -785,32 +559,16 @@ style="border:0;border-radius:20px;">
 <!-- Premium Gallery Popup -->
 <div id="galleryModal" class="gallery-modal">
   <span class="gallery-close" onclick="closeGallery()">&times;</span>
-  
   <div class="modal-content">
     <img id="galleryImage" class="gallery-modal-img">
-    
     <div class="modal-controls">
-      <button onclick="prevImage()">❮</button>
-      <button onclick="nextImage()">❯</button>
+      <button onclick="prevImage()">‹</button>
+      <button onclick="nextImage()">›</button>
     </div>
-    
   </div>
 </div>
-
-<!-- Floating WhatsApp Button -->
-<a href="https://wa.me/919021512392?text=Hi%20I%20want%20to%20check%20availability%20at%207%20Oceans%20Resort"
-class="whatsapp-float"
-target="_blank"
-rel="noopener">
-
-<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-
-</a>
-
+  
 <script>
-
-/* SECTION SCROLL ANIMATION */
-
 const sections = document.querySelectorAll("section");
 
 const observer = new IntersectionObserver(entries => {
@@ -818,146 +576,81 @@ const observer = new IntersectionObserver(entries => {
     if(entry.isIntersecting){
       entry.target.classList.add("active");
 
-      const cards = entry.target.querySelectorAll(".card");
-
-      cards.forEach((card,index)=>{
-        setTimeout(()=>{
-          card.style.opacity="1";
-          card.style.transform="translateY(0)";
-        }, index * 150);
-      });
-
+const cards = entry.target.querySelectorAll(".card");
+cards.forEach((card,index)=>{
+setTimeout(()=>{
+card.style.opacity="1";
+card.style.transform="translateY(0)";
+}, index * 150);
+});
     }
   });
-},{
-threshold:0.15
+}, {
+  threshold: 0.15
 });
 
-sections.forEach(section=>{
-observer.observe(section);
+sections.forEach(section => {
+  observer.observe(section);
 });
-
-
-/* NAVBAR SCROLL EFFECT */
-
 const nav = document.querySelector("nav");
 
 window.addEventListener("scroll",()=>{
-
 const scrollTop=document.documentElement.scrollTop;
 const height=document.documentElement.scrollHeight - document.documentElement.clientHeight;
 const progress=(scrollTop/height)*100;
-
 document.getElementById("progress-bar").style.width=progress+"%";
 
 if(window.scrollY > 50){
 nav.classList.add("scrolled");
-}else{
+} else {
 nav.classList.remove("scrolled");
 }
-
 });
-
-
-/* LOADER */
 
 window.addEventListener("load",()=>{
 const loader = document.getElementById("loader");
-
 loader.style.opacity = "0";
 loader.style.transition = "opacity 0.5s ease";
-
 setTimeout(()=>{
 loader.style.display="none";
 },500);
-
 });
-
-
-/* HERO IMAGE SLIDER */
-
-let slides = document.querySelectorAll(".slide");
-let index = 0;
-
-setInterval(()=>{
-
-slides[index].classList.remove("active");
-
-index = (index + 1) % slides.length;
-
-slides[index].classList.add("active");
-
-},5000);
-
-
-/* REVIEWS SLIDER */
-
-let reviews = document.querySelectorAll(".review");
-let reviewIndex = 0;
-
-setInterval(()=>{
-
-reviews[reviewIndex].classList.remove("active");
-
-reviewIndex = (reviewIndex + 1) % reviews.length;
-
-reviews[reviewIndex].classList.add("active");
-
-},6000);
-
-
-/* GALLERY */
 
 let currentImages = [];
 let currentIndex = 0;
 
 const imageSets = {
-  villa: ["VILLA.jpg", "HERO.jpg", "VILLA2.jpeg", "VILLAS.webp", "VILLABT1.jpeg", "VILLA3.jpg", "VILLA4.jpeg", "VILLABT2.jpeg", "VILLA5.webp", "VILLA6.webp", "VILLABT3.jpeg", "VILLA7.webp", "VILLA8.webp"],
-  garden: ["LAWN.jpg", "GAMES2.jpg", "GAMES1.jpg", "EVENT1.jpg"],
-  property: ["POOL.jpg", "POOL2.jpeg", "POOL3.jpeg", "POOL4.jpg", "POOL5.webp", "POOL6.webp", "POOL7.webp", "POOL8.webp"]
+  villa: ["VILLA.jpg.jpg", "HERO.jpg.jpg", "VILLA2.jpeg", "VILLA3.jpg", "VILLA4.jpeg"],
+  garden: ["LAWN.jpg.jpg", "GAMES2.jpg", "GAMES1.jpg", "EVENT1.jpg"],
+  property: ["POOL.jpg.jpg", "POOL2.jpeg", "POOL3.jpeg", "POOL4.jpg"]
 };
 
 function openGallerySet(type){
-
-currentImages = imageSets[type];
-currentIndex = 0;
-
-document.getElementById("galleryImage").src = currentImages[currentIndex];
-
-document.getElementById("galleryModal").style.display = "flex";
-
+  currentImages = imageSets[type];
+  currentIndex = 0;
+  document.getElementById("galleryImage").src = currentImages[currentIndex];
+  document.getElementById("galleryModal").style.display = "flex";
 }
 
 function nextImage(){
-
-currentIndex = (currentIndex + 1) % currentImages.length;
-
-document.getElementById("galleryImage").src = currentImages[currentIndex];
-
+  currentIndex = (currentIndex + 1) % currentImages.length;
+  document.getElementById("galleryImage").src = currentImages[currentIndex];
 }
 
 function prevImage(){
-
-currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-
-document.getElementById("galleryImage").src = currentImages[currentIndex];
-
+  currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+  document.getElementById("galleryImage").src = currentImages[currentIndex];
 }
 
 function closeGallery(){
-
-document.getElementById("galleryModal").style.display = "none";
-
+  document.getElementById("galleryModal").style.display = "none";
 }
 
 window.addEventListener("keydown", function(e){
-
-if(e.key === "Escape"){
-closeGallery();
-}
-
+  if(e.key === "Escape"){
+    closeGallery();
+  }
 });
-
 </script>
 
 </body>
