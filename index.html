@@ -540,6 +540,46 @@ max-width:900px;
 margin:auto;
 }
 
+/* REVIEWS */
+
+.reviews-slider{
+max-width:800px;
+margin:auto;
+text-align:center;
+position:relative;
+}
+
+.review{
+opacity:0;
+position:absolute;
+left:0;
+right:0;
+transition:opacity 1s ease;
+}
+
+.review.active{
+opacity:1;
+position:relative;
+}
+
+.review p{
+font-size:20px;
+line-height:1.6;
+color:#e2e8f0;
+margin-bottom:20px;
+}
+
+.review h4{
+color:#FFD700;
+margin-bottom:10px;
+font-size:22px;
+}
+
+.review span{
+color:#94a3b8;
+font-size:14px;
+}
+
 </style>
 </head>
 
@@ -682,7 +722,35 @@ margin:auto;
 Families, corporate teams and private groups regularly choose 7 Oceans Resort for exclusive celebrations, weekend escapes and peaceful coastal stays. Our serene setting and personalized hospitality make every visit memorable.
 </p>
 </section>
-  
+
+<section id="reviews">
+
+<h2 class="section-title">Guest Experiences</h2>
+
+<div class="reviews-slider">
+
+<div class="review active">
+<p>"Amazing stay! The villas are beautiful and the atmosphere is extremely peaceful. Perfect for weekend getaway."</p>
+<h4>★★★★★</h4>
+<span>– Google Guest Review</span>
+</div>
+
+<div class="review">
+<p>"Great place for birthday celebrations and family gatherings. Staff was very helpful and the property is stunning."</p>
+<h4>★★★★★</h4>
+<span>– Google Guest Review</span>
+</div>
+
+<div class="review">
+<p>"Loved the floating villas and the greenery around the resort. A hidden gem near Palghar."</p>
+<h4>★★★★★</h4>
+<span>– Google Guest Review</span>
+</div>
+
+</div>
+
+</section>
+
 <section id="contact" class="contact">
 <h2 class="section-title">Begin Your Journey</h2>
 <form action="https://formsubmit.co/muzammilquraishi1786@gmail.com" method="POST">
@@ -831,6 +899,20 @@ index = (index + 1) % slides.length;
 slides[index].classList.add("active");
 
 },5000);
+
+let reviews = document.querySelectorAll(".review");
+let reviewIndex = 0;
+
+setInterval(()=>{
+
+reviews[reviewIndex].classList.remove("active");
+
+reviewIndex = (reviewIndex + 1) % reviews.length;
+
+reviews[reviewIndex].classList.add("active");
+
+},6000);
+
 </script>
 
 </body>
