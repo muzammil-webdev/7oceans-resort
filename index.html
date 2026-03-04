@@ -808,6 +808,9 @@ rel="noopener">
 </a>
 
 <script>
+
+/* SECTION SCROLL ANIMATION */
+
 const sections = document.querySelectorAll("section");
 
 const observer = new IntersectionObserver(entries => {
@@ -815,88 +818,68 @@ const observer = new IntersectionObserver(entries => {
     if(entry.isIntersecting){
       entry.target.classList.add("active");
 
-const cards = entry.target.querySelectorAll(".card");
-cards.forEach((card,index)=>{
-setTimeout(()=>{
-card.style.opacity="1";
-card.style.transform="translateY(0)";
-}, index * 150);
-});
+      const cards = entry.target.querySelectorAll(".card");
+
+      cards.forEach((card,index)=>{
+        setTimeout(()=>{
+          card.style.opacity="1";
+          card.style.transform="translateY(0)";
+        }, index * 150);
+      });
+
     }
   });
-}, {
-  threshold: 0.15
+},{
+threshold:0.15
 });
 
-sections.forEach(section => {
-  observer.observe(section);
+sections.forEach(section=>{
+observer.observe(section);
 });
+
+
+/* NAVBAR SCROLL EFFECT */
+
 const nav = document.querySelector("nav");
 
 window.addEventListener("scroll",()=>{
+
 const scrollTop=document.documentElement.scrollTop;
 const height=document.documentElement.scrollHeight - document.documentElement.clientHeight;
 const progress=(scrollTop/height)*100;
+
 document.getElementById("progress-bar").style.width=progress+"%";
 
 if(window.scrollY > 50){
 nav.classList.add("scrolled");
-} else {
+}else{
 nav.classList.remove("scrolled");
 }
+
 });
+
+
+/* LOADER */
 
 window.addEventListener("load",()=>{
 const loader = document.getElementById("loader");
+
 loader.style.opacity = "0";
 loader.style.transition = "opacity 0.5s ease";
+
 setTimeout(()=>{
 loader.style.display="none";
 },500);
+
 });
 
-let currentImages = [];
-let currentIndex = 0;
 
-const imageSets = {
-  villa: ["VILLA.jpg", "HERO.jpg", "VILLA2.jpeg", "VILLAS.webp", "VILLABT1.jpeg", "VILLA3.jpg", "VILLA4.jpeg", "VILLABT2.jpeg", "VILLA5.webp", "VILLA6.webp", "VILLABT3.jpeg", "VILLA7.webp", "VILLA8.webp", ],
-  garden: ["LAWN.jpg", "GAMES2.jpg", "GAMES1.jpg", "EVENT1.jpg"],
-  property: ["POOL.jpg", "POOL2.jpeg", "POOL3.jpeg", "POOL4.jpg", "POOL5.webp", "POOL6.webp", "POOL7.webp", "POOL8.webp"]
-};
-
-function openGallerySet(type){
-  currentImages = imageSets[type];
-  currentIndex = 0;
-  document.getElementById("galleryImage").src = currentImages[currentIndex];
-  document.getElementById("galleryModal").style.display = "flex";
-}
-
-function nextImage(){
-  currentIndex = (currentIndex + 1) % currentImages.length;
-  document.getElementById("galleryImage").src = currentImages[currentIndex];
-}
-
-function prevImage(){
-  currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-  document.getElementById("galleryImage").src = currentImages[currentIndex];
-}
-
-function closeGallery(){
-  document.getElementById("galleryModal").style.display = "none";
-}
-
-window.addEventListener("keydown", function(e){
-  if(e.key === "Escape"){
-    closeGallery();
-  }
-});
+/* HERO IMAGE SLIDER */
 
 let slides = document.querySelectorAll(".slide");
 let index = 0;
 
 setInterval(()=>{
-
-let sliderInterval = setInterval(()=>{
 
 slides[index].classList.remove("active");
 
@@ -905,6 +888,9 @@ index = (index + 1) % slides.length;
 slides[index].classList.add("active");
 
 },5000);
+
+
+/* REVIEWS SLIDER */
 
 let reviews = document.querySelectorAll(".review");
 let reviewIndex = 0;
@@ -918,6 +904,59 @@ reviewIndex = (reviewIndex + 1) % reviews.length;
 reviews[reviewIndex].classList.add("active");
 
 },6000);
+
+
+/* GALLERY */
+
+let currentImages = [];
+let currentIndex = 0;
+
+const imageSets = {
+  villa: ["VILLA.jpg", "HERO.jpg", "VILLA2.jpeg", "VILLAS.webp", "VILLABT1.jpeg", "VILLA3.jpg", "VILLA4.jpeg", "VILLABT2.jpeg", "VILLA5.webp", "VILLA6.webp", "VILLABT3.jpeg", "VILLA7.webp", "VILLA8.webp"],
+  garden: ["LAWN.jpg", "GAMES2.jpg", "GAMES1.jpg", "EVENT1.jpg"],
+  property: ["POOL.jpg", "POOL2.jpeg", "POOL3.jpeg", "POOL4.jpg", "POOL5.webp", "POOL6.webp", "POOL7.webp", "POOL8.webp"]
+};
+
+function openGallerySet(type){
+
+currentImages = imageSets[type];
+currentIndex = 0;
+
+document.getElementById("galleryImage").src = currentImages[currentIndex];
+
+document.getElementById("galleryModal").style.display = "flex";
+
+}
+
+function nextImage(){
+
+currentIndex = (currentIndex + 1) % currentImages.length;
+
+document.getElementById("galleryImage").src = currentImages[currentIndex];
+
+}
+
+function prevImage(){
+
+currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+
+document.getElementById("galleryImage").src = currentImages[currentIndex];
+
+}
+
+function closeGallery(){
+
+document.getElementById("galleryModal").style.display = "none";
+
+}
+
+window.addEventListener("keydown", function(e){
+
+if(e.key === "Escape"){
+closeGallery();
+}
+
+});
 
 </script>
 
