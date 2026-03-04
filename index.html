@@ -100,6 +100,9 @@ justify-content:center;
 align-items:center;
 text-align:center;
 padding:20px;
+
+background:radial-gradient(circle at 30% 40%, rgba(0,188,212,0.15), transparent 60%);
+animation:heroLight 8s ease-in-out infinite alternate;
 }
 
 .hero::before{
@@ -109,16 +112,54 @@ top:0;
 left:0;
 width:100%;
 height:100%;
+
 background:
-linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.8)),
-url('HERO2.jpg.jpeg') center/cover;
+linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.85)),
+url('HERO2.jpg.jpeg') center/cover no-repeat;
+
 z-index:-1;
-animation:heroZoom 12s ease-in-out infinite alternate;
+
+animation:heroSlider 24s infinite ease-in-out;
 }
 
-@keyframes heroZoom{
-0%{transform:scale(1);}
-100%{transform:scale(1.08);}
+@keyframes heroSlider{
+
+0%{
+background:
+linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.85)),
+url('HERO.jpg.jpg') center/cover no-repeat;
+}
+
+33%{
+background:
+linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.85)),
+url('VILLAS.webp') center/cover no-repeat;
+}
+
+66%{
+background:
+linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.85)),
+url('HERO3.webp') center/cover no-repeat;
+}
+
+100%{
+background:
+linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.85)),
+url('HERO4.webp') center/cover no-repeat;
+}
+
+}
+
+@keyframes heroLight{
+
+0%{
+background-position:30% 40%;
+}
+
+100%{
+background-position:70% 60%;
+}
+
 }
 
 .hero h1{
