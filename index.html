@@ -34,19 +34,19 @@ animation:pageReveal 1.2s ease forwards;
 nav{
 position:fixed;
 top:0;
+left:0;
 width:100%;
 padding:18px 8%;
 display:flex;
 justify-content:space-between;
 align-items:center;
 
-background:rgba(6,30,47,0.65);
+background:rgba(6,30,47,0.85);
 backdrop-filter:blur(18px);
--webkit-backdrop-filter:blur(18px);
 
 border-bottom:1px solid rgba(255,255,255,0.08);
 
-z-index:1000;
+z-index:9999;
 transition:all 0.35s ease;
 }
 
@@ -172,20 +172,15 @@ background:linear-gradient(135deg,#ffffff,#e0f7fa);
 /* SECTION */
 /* SECTION */
 
-section{
+.section{
 padding:140px 8%;
 opacity:0;
 transform:translateY(60px);
 transition:opacity 0.8s ease, transform 0.8s ease;
-
-background:linear-gradient(
-180deg,
-rgba(255,255,255,0.02),
-rgba(0,0,0,0)
-);
+will-change:opacity, transform;
 }
 
-section.active{
+.section.active{
 opacity:1;
 transform:translateY(0);
 }
@@ -423,6 +418,16 @@ align-items:center;
 justify-content:center;
 }
 
+.gallery-close{
+position:absolute;
+top:-50px;
+right:-20px;
+font-size:40px;
+color:white;
+cursor:pointer;
+z-index:10000;
+}
+
 .gallery-modal-img{
   width:auto;
   height:auto;
@@ -432,16 +437,6 @@ justify-content:center;
   border-radius:20px;
   box-shadow:0 30px 80px rgba(0,0,0,0.8);
   animation:zoomIn 0.3s ease;
-}
-
-.gallery-close{
-  position:absolute;
-  top:30px;
-  right:40px;
-  font-size:45px;
-  color:white;
-  cursor:pointer;
-  transition:0.3s;
 }
 
 .gallery-close:hover{
@@ -483,19 +478,18 @@ transform:scale(1.15);
 
 .whatsapp-float{
 position:fixed;
-bottom:28px;
-right:28px;
-width:62px;
-height:62px;
+bottom:25px;
+right:25px;
+width:60px;
+height:60px;
 border-radius:50%;
-background:linear-gradient(135deg,#25D366,#128C7E);
+background:#25D366;
 display:flex;
 align-items:center;
 justify-content:center;
-box-shadow:0 12px 35px rgba(0,0,0,0.35);
-z-index:9999;
-transition:all 0.3s ease;
-animation:whatsappFloat 3s ease-in-out infinite;
+box-shadow:0 10px 30px rgba(0,0,0,0.35);
+z-index:10000;
+cursor:pointer;
 }
 
 .whatsapp-float img{
@@ -901,6 +895,8 @@ let slides = document.querySelectorAll(".slide");
 let index = 0;
 
 setInterval(()=>{
+
+let sliderInterval = setInterval(()=>{
 
 slides[index].classList.remove("active");
 
