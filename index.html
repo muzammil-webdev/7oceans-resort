@@ -171,10 +171,9 @@ background:linear-gradient(135deg,#ffffff,#e0f7fa);
 
 /* SECTION */
 section{
-padding:120px 8%;
-opacity:0;
-transform:translateY(40px);
-transition:opacity 0.5s ease, transform 0.5s ease;
+padding:140px 8%;
+opacity:1;
+transform:none;
 }
 
 background:linear-gradient(
@@ -473,7 +472,7 @@ transform:scale(1.15);
 }
 
 .whatsapp-float{
-position:fixed;
+position:fixed !important;
 bottom:30px;
 right:30px;
 width:62px;
@@ -485,8 +484,6 @@ align-items:center;
 justify-content:center;
 box-shadow:0 12px 35px rgba(0,0,0,0.35);
 z-index:999999;
-transition:all 0.3s ease;
-animation:whatsappFloat 3s ease-in-out infinite;
 }
 
 .whatsapp-float img{
@@ -515,7 +512,7 @@ left:0;
 width:100%;
 height:100%;
 overflow:hidden;
-z-index:0;
+z-index:-1;
 }
 
 .hero-slider img{
