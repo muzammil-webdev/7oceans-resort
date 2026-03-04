@@ -30,15 +30,21 @@ scroll-padding-top:100px;
 /* NAV */
 nav{
 position:fixed;
+top:0;
 width:100%;
-padding:20px 8%;
+padding:18px 8%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:rgba(0,0,0,0.4);
-backdrop-filter:blur(10px);
+
+background:rgba(6,30,47,0.65);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border-bottom:1px solid rgba(255,255,255,0.08);
+
 z-index:1000;
-transition:all 0.3s ease;  
+transition:all 0.35s ease;
 }
 
 nav.scrolled{
@@ -49,14 +55,18 @@ padding:15px 8%;
   
 nav a{
 position:relative;
-color:white;
+color:rgba(255,255,255,0.85);
 text-decoration:none;
 margin-left:35px;
 font-weight:600;
-letter-spacing:1.5px;
+letter-spacing:1px;
 text-transform:uppercase;
 font-size:14px;
 transition:all 0.3s ease;
+}
+
+nav a:hover{
+color:#00bcd4;
 }
 
 nav a::after{
