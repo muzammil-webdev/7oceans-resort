@@ -24,7 +24,10 @@ background:#061e2f;
 color:white;
 overflow-x:hidden;
 line-height:1.6;
-scroll-padding-top:100px;  
+scroll-padding-top:100px;
+
+opacity:0;
+animation:pageReveal 1.2s ease forwards;
 }
 
 /* NAV */
@@ -100,55 +103,12 @@ justify-content:center;
 align-items:center;
 text-align:center;
 padding:20px;
+z-index:1;
 
 background:radial-gradient(circle at 30% 40%, rgba(0,188,212,0.15), transparent 60%);
 animation:heroLight 8s ease-in-out infinite alternate;
 }
 
-.hero::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-
-background:
-linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.85)),
-url('HERO2.jpg.jpeg') center/cover no-repeat;
-
-z-index:-1;
-
-animation:heroSlider 24s infinite ease-in-out;
-}
-
-@keyframes heroSlider{
-
-0%{
-background:
-linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.85)),
-url('HERO.jpg.jpg') center/cover no-repeat;
-}
-
-33%{
-background:
-linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.85)),
-url('VILLAS.webp') center/cover no-repeat;
-}
-
-66%{
-background:
-linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.85)),
-url('HERO3.webp') center/cover no-repeat;
-}
-
-100%{
-background:
-linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.85)),
-url('HERO4.webp') center/cover no-repeat;
-}
-
-}
 
 @keyframes heroLight{
 
@@ -158,6 +118,20 @@ background-position:30% 40%;
 
 100%{
 background-position:70% 60%;
+}
+
+}
+
+@keyframes pageReveal{
+
+0%{
+opacity:0;
+transform:translateY(10px);
+}
+
+100%{
+opacity:1;
+transform:translateY(0);
 }
 
 }
@@ -445,7 +419,7 @@ width:auto;
   height:auto;
   max-width:80vw;
   max-height:75vh;
-  object-fit:contain;
+  object-fit:cover;
   border-radius:20px;
   box-shadow:0 30px 80px rgba(0,0,0,0.8);
   animation:zoomIn 0.3s ease;
@@ -531,6 +505,41 @@ box-shadow:0 18px 55px rgba(0,0,0,0.5);
 50%{transform:translateY(-6px);}
 100%{transform:translateY(0);}
 }
+
+/* HERO IMAGE SLIDER */
+
+.hero-slider{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+overflow:hidden;
+z-index:0;
+}
+
+.hero-slider img{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0;
+transition:opacity 1.5s ease;
+filter:brightness(0.75);
+}
+
+.hero-slider img.active{
+opacity:1;
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+text-align:center;
+max-width:900px;
+margin:auto;
+}
+
 </style>
 </head>
 
@@ -558,11 +567,24 @@ box-shadow:0 18px 55px rgba(0,0,0,0.5);
 </nav>
 
 <div class="hero">
+
+<div class="hero-slider">
+
+<img src="HERO2.jpg.jpeg" class="slide active">
+<img src="HERO3.webp" class="slide">
+<img src="VILLAS.webp" class="slide">
+
+</div>
+
+<div class="hero-content">
+
 <h1>Stay at 7 Oceans Resort & Experience Coastal Luxury in Palghar</h1>
 
 <p>Private Beach House Villas • Perfect for Birthdays & Retreats • Direct Booking = Best Rates Guaranteed</p>
 
 <a href="#contact" class="btn">Check Availability Now</a>
+
+</div>
 
 </div>
 
@@ -796,6 +818,19 @@ window.addEventListener("keydown", function(e){
     closeGallery();
   }
 });
+
+let slides = document.querySelectorAll(".slide");
+let index = 0;
+
+setInterval(()=>{
+
+slides[index].classList.remove("active");
+
+index = (index + 1) % slides.length;
+
+slides[index].classList.add("active");
+
+},5000);
 </script>
 
 </body>
