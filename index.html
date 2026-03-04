@@ -101,7 +101,7 @@ width:100%;
 height:100%;
 background:
 linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.8)),
-url('HERO2.jpg.jpeg') center/cover;
+url('HERO2.jpeg') center/cover;
 z-index:-1;
 animation:heroZoom 12s ease-in-out infinite alternate;
 }
@@ -505,17 +505,17 @@ Chat on WhatsApp
 <div class="gallery">
 
 <div class="gallery-card" onclick="openGallerySet('villa')">
-  <img src="VILLA.jpg.jpg" loading="lazy">
+  <img src="VILLA.jpg" loading="lazy">
   <p>Luxury Floating Villa</p>
 </div>
 
 <div class="gallery-card" onclick="openGallerySet('garden')">
-  <img src="LAWN.jpg.jpg" loading="lazy">
+  <img src="LAWN.jpg" loading="lazy">
   <p>Events & Entertainment</p>
 </div>
 
 <div class="gallery-card" onclick="openGallerySet('property')">
-  <img src="POOL.jpg.jpg" loading="lazy">
+  <img src="POOL.jpg" loading="lazy">
   <p>Swimming Pool Fun</p>
 </div>
 
@@ -620,9 +620,9 @@ let currentImages = [];
 let currentIndex = 0;
 
 const imageSets = {
-  villa: ["VILLA.jpg.jpg", "HERO.jpg.jpg", "VILLA2.jpeg", "VILLA3.jpg", "VILLA4.jpeg"],
-  garden: ["LAWN.jpg.jpg", "GAMES2.jpg", "GAMES1.jpg", "EVENT1.jpg"],
-  property: ["POOL.jpg.jpg", "POOL2.jpeg", "POOL3.jpeg", "POOL4.jpg"]
+  villa: ["VILLA.jpg", "HERO.jpg", "VILLA2.jpeg", "VILLA3.jpg", "VILLA4.jpeg"],
+  garden: ["LAWN.jpg", "GAMES2.jpg", "GAMES1.jpg", "EVENT1.jpg"],
+  property: ["POOL.jpg", "POOL2.jpeg", "POOL3.jpeg", "POOL4.jpg"]
 };
 
 function openGallerySet(type){
