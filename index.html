@@ -293,7 +293,6 @@ margin-top:60px;
 
 /* MOBILE NAV FIX */
 @media(max-width:768px){
-
 nav{
 flex-direction:column;
 gap:10px;
@@ -311,10 +310,11 @@ margin:8px;
 
 .hero{
 height:auto;
-min-height:100vh;
-padding:120px 20px 60px 20px;
+min-height:calc(100vh - 140px);
+padding:40px 20px 60px 20px;
+justify-content:flex-start;
 }
-
+  
 }
 #loader{
 position:fixed;
