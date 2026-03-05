@@ -5,874 +5,1041 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>7 Oceans Resort | Coastal Luxury</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-
-<meta name="description" content="Luxury Beach Resort in Palghar offering premium floating villas, lush green lawns and private events. Book directly at 7 Oceans Resort.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
+
+<meta name="description" content="Luxury Beach Resort in Palghar offering premium floating villas, lush green lawns and private events. Book directly at 7 Oceans Resort.">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
 :root{
---primary:#A7856A;
---primary-dark:#8f6f56;
---cream:#f7f3ef;
---dark:#2a2a2a;
+  --primary:#A7856A;
+  --primary-dark:#8f6f56;
+  --primary-light:#c4a48e;
+  --cream:#f7f3ef;
+  --dark:#1a1a1a;
+  --text:#3a3a3a;
+  --muted:#888;
 }
 
-html{
-scroll-behavior:smooth;
-}
-  
+html{ scroll-behavior:smooth; }
+
 body{
-font-family:'Inter',sans-serif;
-background:var(--cream);
-color:var(--dark);
-overflow-x:hidden;
-line-height:1.6;
-scroll-padding-top:100px;
+  font-family:'DM Sans',sans-serif;
+  background:var(--cream);
+  color:var(--dark);
+  overflow-x:hidden;
+  line-height:1.6;
+  scroll-padding-top:80px;
 }
 
-/* NAV */
+/* ─── LOADER ─── */
+#loader{
+  position:fixed;
+  width:100%;height:100vh;
+  background:#0a0f1c;
+  display:flex;justify-content:center;align-items:center;
+  z-index:3000;
+  transition:opacity 0.5s ease;
+}
+.spinner{
+  width:48px;height:48px;
+  border:3px solid rgba(255,255,255,0.15);
+  border-top:3px solid var(--primary-light);
+  border-radius:50%;
+  animation:spin 0.9s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ─── PROGRESS BAR ─── */
+#progress-bar{
+  position:fixed;top:0;left:0;
+  height:3px;width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light));
+  z-index:4000;
+  transition:width 0.1s;
+}
+
+/* ─── NAV ─── */
 nav{
-position:fixed;
-width:100%;
-padding:20px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0));
-backdrop-filter:blur(10px);
-z-index:1000;
-transition:all 0.3s ease;  
-}
-
-nav.scrolled{
-background:linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0));
-padding:15px 8%;
-}
-  
-nav a{
-position:relative;
-color:white;
-text-decoration:none;
-margin-left:35px;
-font-weight:600;
-letter-spacing:1.5px;
-text-transform:uppercase;
-font-size:14px;
-transition:all 0.3s ease;
-text-shadow:0 2px 8px rgba(0,0,0,0.6);
-}
-
-nav a::after{
-content:"";
-position:absolute;
-left:0;
-bottom:-6px;
-width:0%;
-height:2px;
-background:#00bcd4;
-transition:0.3s;
-}
-
-nav a:hover{
-color:var(--primary);
-}
-
-nav a:hover::after{
-width:100%;
-}
-
-/* HERO */
-.hero{
-height:100vh;
-margin-top:0;
-position:relative;
-overflow:hidden;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
-}
-
-.hero::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:
-linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.8)),
-url('HERO2.jpeg') center/cover;
-z-index:-1;
-animation:heroZoom 12s ease-in-out infinite alternate;
-}
-
-@keyframes heroZoom{
-0%{transform:scale(1);}
-100%{transform:scale(1.08);}
-}
-
-.hero h1{
-font-size:clamp(42px,6vw,72px);
-font-weight:700;
-letter-spacing:1px;
-color:white;
-text-shadow:
-0 3px 10px rgba(0,0,0,0.8),
-0 0 20px rgba(0,0,0,0.6);
-}
-
-.hero p{
-font-size:clamp(16px,3vw,22px);
-margin-bottom:30px;
-color:#cbd5e1;
-}
-
-.btn{
-background:var(--primary);
-color:white;
-padding:14px 35px;
-border-radius:40px;
-text-decoration:none;
-font-weight:600;
-display:inline-block;
-transition:all 0.3s ease;
-box-shadow:0 8px 20px rgba(0,0,0,0.15);
-}
-
-.btn:hover{
-background:var(--primary-dark);
-transform:translateY(-3px) scale(1.03);
-box-shadow:0 15px 35px rgba(0,0,0,0.35);
-}
-
-/* SECTION */
-section{
-padding:120px 8%;
-opacity:0;
-transform:translateY(60px);
-transition:opacity 0.8s ease, transform 0.8s ease;
-will-change: opacity, transform;
-}
-
-section.active{
-opacity:1;
-transform:translateY(0);
-}
-
-.section-title{
-font-size:clamp(28px,5vw,48px);
-margin-bottom:60px;
-text-align:center;
-font-weight:700;
-font-family:'Playfair Display',serif;
-}
-
-.section-title::after{
-content:"";
-display:block;
-width:70px;
-height:3px;
-background:linear-gradient(90deg,var(--primary),transparent);
-margin:20px auto 0;
-border-radius:5px;
-}
-  
-/* CARDS */
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:30px;
-}
-
-.card{
-background:white;
-padding:40px;
-border-radius:20px;
-border:1px solid rgba(0,0,0,0.08);
-transition:0.4s;
-opacity:0;
-transform:translateY(40px);
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
-
-.card:hover{
-transform:translateY(-10px);
-}
-
-/* GALLERY */
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:25px;
-max-width:1200px;
-margin:auto;
-}
-
-.gallery img{
-width:100%;
-height:240px;
-object-fit:cover;
-border-radius:20px;
-cursor:pointer;
-box-shadow:0 15px 40px rgba(0,0,0,0.25);
-transition:transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.gallery-card:hover img{
-transform:scale(1.04);
-box-shadow:0 25px 60px rgba(0,0,0,0.6);
-}
-
-.gallery-card{
-  cursor:pointer;
-  text-align:center;
-  transition:0.3s;
-}
-
-.gallery-card p{
-  margin-top:14px;
-  font-size:16px;
-  font-weight:600;
-  letter-spacing:0.5px;
-  color:#ffffff;
-  text-align:center;
-  opacity:0.9;
+  position:fixed;
+  width:100%;
+  padding:18px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.6),transparent);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  z-index:1000;
   transition:all 0.3s ease;
 }
-
-.gallery-card:hover p{
-  color:#00bcd4;
-  opacity:1;
-}
-
-.gallery-card:hover{
-  transform:translateY(-5px);
-}
-
-.gallery img:hover{
-transform:scale(1.05);
-}
-
-/* CONTACT */
-.contact form{
-display:flex;
-flex-direction:column;
-max-width:500px;
-margin:0 auto;
-gap:20px;
-}
-
-.contact input,
-.contact textarea{
-padding:15px;
-border-radius:10px;
-border:none;
-font-size:16px;
-}
-
-.contact input:focus,
-.contact textarea:focus{
-outline:none;
-box-shadow:0 0 12px rgba(0,229,255,0.6);
-}
-  
-/* FOOTER */
-footer{
-background:#020617;
-text-align:center;
-padding:30px;
-margin-top:60px;
-}
-
-/* MOBILE NAV FIX */
-@media(max-width:768px){
-
-.menu-toggle{
-display:block;
-position:absolute;
-right:20px;
-top:22px;
-}
-
-.nav-links{
-display:none;
-flex-direction:column;
-width:100%;
-text-align:center;
-margin-top:15px;
-}
-
-.nav-links a{
-display:block;
-margin:14px 0;
-font-size:16px;
-}
-
-nav{
-flex-direction:row;
-align-items:center;
-}
-
-.hero{
-padding-top:120px;
-}
-
-}
-#loader{
-position:fixed;
-width:100%;
-height:100vh;
-background:#0a0f1c;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:3000;
-}
-
-.spinner{
-width:50px;
-height:50px;
-border:4px solid rgba(255,255,255,0.2);
-border-top:4px solid #00bcd4;
-border-radius:50%;
-animation:spin 1s linear infinite;
-}
-
-@keyframes spin{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
-  
-#progress-bar{
-position:fixed;
-top:0;
-left:0;
-height:4px;
-width:0%;
-background:#00bcd4;
-z-index:4000;
-}
-
-#sticky-booking a:hover{
-transform:scale(1.05);
-} 
-
-.hero h1{
-animation:fadeUp 1.2s ease forwards;
-opacity:0;
-}
-
-.hero p{
-animation:fadeUp 1.8s ease forwards;
-opacity:0;
-}
-
-@keyframes fadeUp{
-0%{
-opacity:0;
-transform:translateY(30px);
-}
-100%{
-opacity:1;
-transform:translateY(0);
-}
-} 
-
-@keyframes floatBadge{
-0%{transform:translateY(0);}
-50%{transform:translateY(-6px);}
-100%{transform:translateY(0);}
+nav.scrolled{
+  background:rgba(15,15,15,0.88);
+  padding:14px 6%;
+  box-shadow:0 4px 30px rgba(0,0,0,0.3);
 }
 
 .logo{
-display:flex;
-align-items:center;
-gap:10px;
-font-weight:700;
-font-size:18px;
-color:white;
-text-shadow:0 2px 8px rgba(0,0,0,0.6);
-}
-
-.logo img{
-height:50px;
-width:auto;
-}
-
-.menu-toggle{
-display:none;
-font-size:30px;
-color:white;
-cursor:pointer;
-text-shadow:0 2px 8px rgba(0,0,0,0.6);
-}
-
-.gallery-modal{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.95);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-
-.gallery-modal-img{
-  width:auto;
-  height:auto;
-  max-width:80vw;
-  max-height:75vh;
-  object-fit:contain;
-  border-radius:20px;
-  box-shadow:0 30px 80px rgba(0,0,0,0.8);
-  animation:zoomIn 0.3s ease;
-}
-
-.gallery-close{
-  position:absolute;
-  top:30px;
-  right:40px;
-  font-size:45px;
+  display:flex;align-items:center;gap:10px;
+  font-family:'Cormorant Garamond',serif;
+  font-weight:700;font-size:20px;
   color:white;
-  cursor:pointer;
+  text-shadow:0 2px 8px rgba(0,0,0,0.5);
+  text-decoration:none;
+  flex-shrink:0;
+}
+.logo img{height:44px;width:auto;}
+
+.nav-links{display:flex;align-items:center;gap:0;}
+.nav-links a{
+  position:relative;
+  color:rgba(255,255,255,0.9);
+  text-decoration:none;
+  margin-left:30px;
+  font-weight:500;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  font-size:12px;
+  transition:color 0.3s;
+}
+.nav-links a::after{
+  content:"";
+  position:absolute;left:0;bottom:-5px;
+  width:0%;height:1.5px;
+  background:var(--primary-light);
   transition:0.3s;
 }
+.nav-links a:hover{color:var(--primary-light);}
+.nav-links a:hover::after{width:100%;}
 
-.gallery-close:hover{
-  color:#00bcd4;
-  transform:scale(1.2);
+/* Hamburger */
+.menu-toggle{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+  padding:5px;
+  z-index:1100;
+}
+.menu-toggle span{
+  display:block;width:24px;height:2px;
+  background:white;
+  border-radius:2px;
+  transition:all 0.3s ease;
+}
+.menu-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.menu-toggle.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.menu-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay{
+  display:none;
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100vh;
+  background:rgba(10,10,10,0.97);
+  z-index:1050;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:0;
+}
+.mobile-nav-overlay.open{display:flex;}
+.mobile-nav-overlay a{
+  color:white;
+  text-decoration:none;
+  font-family:'Cormorant Garamond',serif;
+  font-size:36px;
+  font-weight:600;
+  letter-spacing:2px;
+  padding:16px 0;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  width:70%;
+  text-align:center;
+  transition:color 0.3s;
+}
+.mobile-nav-overlay a:last-child{border-bottom:none;}
+.mobile-nav-overlay a:hover{color:var(--primary-light);}
+.mobile-close{
+  position:absolute;top:24px;right:24px;
+  font-size:32px;color:white;cursor:pointer;
+  opacity:0.7;transition:opacity 0.2s;
+}
+.mobile-close:hover{opacity:1;}
+
+/* ─── HERO ─── */
+.hero{
+  height:100vh;
+  min-height:600px;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;
+  padding:20px 24px;
+}
+.hero::before{
+  content:"";
+  position:absolute;top:0;left:0;
+  width:100%;height:100%;
+  background:linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.75)),
+             url('HERO2.jpeg') center/cover no-repeat;
+  z-index:-1;
+  animation:heroZoom 14s ease-in-out infinite alternate;
+}
+@keyframes heroZoom{
+  0%{transform:scale(1);}
+  100%{transform:scale(1.07);}
 }
 
+.hero-badge{
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.25);
+  padding:8px 20px;
+  border-radius:30px;
+  font-size:13px;
+  margin-bottom:22px;
+  letter-spacing:1.5px;
+  color:rgba(255,255,255,0.9);
+  animation:floatBadge 4s ease-in-out infinite;
+  text-transform:uppercase;
+}
+
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(38px,6vw,72px);
+  font-weight:700;
+  line-height:1.15;
+  color:white;
+  text-shadow:0 3px 14px rgba(0,0,0,0.7);
+  max-width:800px;
+  animation:fadeUp 1.1s ease forwards;
+  opacity:0;
+}
+.hero-sub{
+  margin-top:14px;
+  font-size:clamp(14px,2.5vw,18px);
+  color:rgba(255,255,255,0.8);
+  animation:fadeUp 1.6s ease forwards;
+  opacity:0;
+}
+.hero-rating{
+  margin-top:10px;
+  font-size:15px;
+  color:rgba(255,255,255,0.75);
+  animation:fadeUp 1.9s ease forwards;
+  opacity:0;
+}
+.hero-btns{
+  margin-top:30px;
+  display:flex;gap:14px;
+  flex-wrap:wrap;
+  justify-content:center;
+  animation:fadeUp 2.1s ease forwards;
+  opacity:0;
+}
+.btn{
+  background:var(--primary);
+  color:white;
+  padding:14px 32px;
+  border-radius:40px;
+  text-decoration:none;
+  font-weight:600;
+  font-size:15px;
+  letter-spacing:0.5px;
+  display:inline-block;
+  transition:all 0.3s ease;
+  box-shadow:0 8px 25px rgba(0,0,0,0.2);
+  border:2px solid transparent;
+  cursor:pointer;
+}
+.btn:hover{
+  background:var(--primary-dark);
+  transform:translateY(-3px);
+  box-shadow:0 15px 40px rgba(0,0,0,0.3);
+}
+.btn-outline{
+  background:transparent;
+  border:2px solid rgba(255,255,255,0.6);
+  color:white;
+  padding:13px 30px;
+  border-radius:40px;
+  text-decoration:none;
+  font-weight:600;
+  font-size:15px;
+  display:inline-block;
+  transition:all 0.3s ease;
+}
+.btn-outline:hover{
+  background:rgba(255,255,255,0.15);
+  border-color:white;
+  transform:translateY(-3px);
+}
+
+@keyframes fadeUp{
+  0%{opacity:0;transform:translateY(28px);}
+  100%{opacity:1;transform:translateY(0);}
+}
+@keyframes floatBadge{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
+}
+
+/* ─── SECTIONS ─── */
+section{
+  padding:100px 8%;
+  opacity:0;
+  transform:translateY(50px);
+  transition:opacity 0.8s ease,transform 0.8s ease;
+  will-change:opacity,transform;
+}
+section.active{opacity:1;transform:translateY(0);}
+
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,4.5vw,50px);
+  font-weight:700;
+  margin-bottom:55px;
+  text-align:center;
+  color:var(--dark);
+  line-height:1.2;
+}
+.section-title::after{
+  content:"";
+  display:block;
+  width:60px;height:2px;
+  background:var(--primary);
+  margin:16px auto 0;
+  border-radius:5px;
+}
+
+/* ─── CARDS ─── */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:24px;
+}
+.card{
+  background:white;
+  padding:36px 30px;
+  border-radius:18px;
+  border:1px solid rgba(0,0,0,0.07);
+  transition:all 0.4s ease;
+  opacity:0;
+  transform:translateY(35px);
+  box-shadow:0 6px 20px rgba(0,0,0,0.06);
+}
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 50px rgba(0,0,0,0.13);
+  border-color:var(--primary-light);
+}
+.card-icon{
+  font-size:32px;
+  margin-bottom:16px;
+  display:block;
+}
+.card h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;
+  font-weight:700;
+  margin-bottom:10px;
+  color:var(--dark);
+}
+.card p{color:var(--text);font-size:15px;line-height:1.7;}
+
+/* ─── GALLERY ─── */
+#gallery{ background:#1a1510; }
+#gallery .section-title{ color:white; }
+#gallery .section-title::after{ background:var(--primary-light); }
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+  max-width:1200px;
+  margin:0 auto;
+}
+.gallery-card{
+  cursor:pointer;
+  text-align:center;
+  transition:0.35s ease;
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+}
+.gallery-card img{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+  display:block;
+  transition:transform 0.5s ease;
+}
+.gallery-card-label{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  padding:20px 16px 16px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.7));
+  color:white;
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:0.5px;
+  transition:all 0.3s ease;
+}
+.gallery-card:hover img{transform:scale(1.06);}
+.gallery-card:hover .gallery-card-label{color:var(--primary-light);}
+
+/* ─── PRICING CARDS ─── */
+.pricing-card{
+  background:white;
+  padding:36px 30px 30px;
+  border-radius:18px;
+  border:1px solid rgba(0,0,0,0.07);
+  box-shadow:0 6px 20px rgba(0,0,0,0.06);
+  transition:all 0.4s ease;
+  display:flex;
+  flex-direction:column;
+  opacity:0;
+  transform:translateY(35px);
+}
+.pricing-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 50px rgba(0,0,0,0.13);
+}
+.pricing-card.featured{
+  border:2px solid var(--primary);
+  position:relative;
+}
+.featured-tag{
+  position:absolute;
+  top:-14px;left:50%;transform:translateX(-50%);
+  background:var(--primary);
+  color:white;
+  padding:4px 18px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.pricing-card h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px;font-weight:700;
+  margin-bottom:10px;
+}
+.price{
+  font-size:22px;font-weight:700;
+  color:var(--primary);
+  margin:14px 0;
+}
+.pricing-card p{color:var(--text);font-size:15px;line-height:1.7;flex-grow:1;}
+.pricing-card .btn{margin-top:22px;text-align:center;}
+
+/* ─── TRUST PROOF ─── */
+#trust-proof{background:#f0ebe5;}
+#trust-proof p{
+  text-align:center;
+  max-width:680px;
+  margin:0 auto;
+  color:var(--text);
+  font-size:16px;
+  line-height:1.9;
+}
+
+/* ─── CONTACT ─── */
+.contact form{
+  display:flex;flex-direction:column;
+  max-width:520px;margin:0 auto;gap:16px;
+}
+.contact input,.contact textarea{
+  padding:14px 18px;
+  border-radius:12px;
+  border:1.5px solid rgba(0,0,0,0.12);
+  font-size:15px;
+  font-family:'DM Sans',sans-serif;
+  background:white;
+  color:var(--dark);
+  transition:border 0.3s,box-shadow 0.3s;
+  width:100%;
+}
+.contact input:focus,.contact textarea:focus{
+  outline:none;
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(167,133,106,0.15);
+}
+.contact textarea{resize:vertical;}
+.contact .btn{width:100%;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;}
+
+/* ─── MAP SECTION ─── */
+#map-section{padding:80px 5%;}
+#map-section .section-title{margin-bottom:35px;}
+#map-section iframe{
+  width:100%;height:420px;
+  border:0;border-radius:18px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.12);
+}
+
+/* ─── FOOTER ─── */
+footer{
+  background:#1a1510;
+  padding:60px 8% 40px;
+  color:rgba(255,255,255,0.8);
+}
+.footer-inner{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:40px;
+  margin-bottom:40px;
+}
+.footer-brand h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;
+  font-weight:700;
+  color:white;
+  margin-bottom:10px;
+}
+.footer-brand p{font-size:14px;line-height:1.8;color:rgba(255,255,255,0.6);}
+.footer-col h4{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:var(--primary-light);
+  margin-bottom:16px;
+}
+.footer-col a,.footer-col p{
+  display:block;
+  font-size:14px;
+  color:rgba(255,255,255,0.65);
+  text-decoration:none;
+  margin-bottom:8px;
+  transition:color 0.3s;
+}
+.footer-col a:hover{color:var(--primary-light);}
+.footer-social{display:flex;gap:12px;margin-top:8px;}
+.footer-social a{
+  width:38px;height:38px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-size:16px;
+  text-decoration:none;
+  transition:all 0.3s;
+  margin-bottom:0;
+}
+.footer-social a:hover{background:var(--primary);transform:translateY(-3px);}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:24px;
+  text-align:center;
+  font-size:13px;
+  color:rgba(255,255,255,0.4);
+}
+
+/* ─── GALLERY MODAL ─── */
+.gallery-modal{
+  position:fixed;top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.96);
+  display:none;
+  justify-content:center;align-items:center;
+  z-index:9999;
+  flex-direction:column;
+}
+.gallery-modal.open{display:flex;}
+.gallery-modal-img{
+  max-width:88vw;max-height:72vh;
+  object-fit:contain;
+  border-radius:16px;
+  animation:zoomIn 0.3s ease;
+}
 @keyframes zoomIn{
-  from{transform:scale(0.85);}
-  to{transform:scale(1);}
+  from{transform:scale(0.88);opacity:0;}
+  to{transform:scale(1);opacity:1;}
 }
-
+.gallery-close{
+  position:absolute;top:24px;right:28px;
+  font-size:40px;color:white;
+  cursor:pointer;opacity:0.7;
+  transition:0.3s;line-height:1;
+}
+.gallery-close:hover{opacity:1;color:var(--primary-light);}
 .modal-controls{
-position:absolute;
-bottom:40px;
-left:50%;
-transform:translateX(-50%);
-display:flex;
-gap:18px;
+  display:flex;gap:16px;margin-top:24px;
 }
-
 .modal-controls button{
-width:50px;
-height:50px;
-border:none;
-border-radius:50%;
-background:rgba(255,255,255,0.15);
-color:white;
-font-size:22px;
-cursor:pointer;
-backdrop-filter:blur(10px);
-transition:all 0.3s ease;
+  width:48px;height:48px;
+  border:none;border-radius:50%;
+  background:rgba(255,255,255,0.12);
+  color:white;font-size:20px;
+  cursor:pointer;
+  backdrop-filter:blur(8px);
+  transition:all 0.3s;
 }
+.modal-controls button:hover{background:var(--primary);}
 
-.modal-controls button:hover{
-background:#00bcd4;
-transform:scale(1.15);
-}
-
+/* ─── WHATSAPP ─── */
 .whatsapp-float{
-position:fixed;
-bottom:30px;
-right:30px;
-width:62px;
-height:62px;
-border-radius:50%;
-background:linear-gradient(135deg,#25D366,#128C7E);
-display:flex;
-align-items:center;
-justify-content:center;
-box-shadow:0 12px 35px rgba(0,0,0,0.35);
-z-index:9999;
-transition:all 0.3s ease;
-animation:whatsappFloat 3s ease-in-out infinite;
+  position:fixed;bottom:90px;right:24px;
+  width:58px;height:58px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 28px rgba(0,0,0,0.3);
+  z-index:999;
+  transition:all 0.3s;
+  animation:floatBadge 3s ease-in-out infinite;
+}
+.whatsapp-float img{width:26px;height:26px;filter:brightness(0) invert(1);}
+.whatsapp-float:hover{transform:scale(1.1);}
+
+/* ─── MOBILE STICKY CTA ─── */
+.sticky-cta{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;
+  padding:14px 20px;
+  background:rgba(15,15,15,0.95);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  z-index:998;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+.sticky-cta a{
+  display:block;width:100%;
+  text-align:center;
+  padding:13px;
+  background:var(--primary);
+  color:white;
+  border-radius:12px;
+  font-weight:600;
+  font-size:15px;
+  text-decoration:none;
+  letter-spacing:0.5px;
 }
 
-.whatsapp-float img{
-width:28px;
-height:28px;
-filter:brightness(0) invert(1);
+/* ─── MOBILE RESPONSIVE ─── */
+@media(max-width:768px){
+
+  nav{padding:16px 5%;}
+  nav.scrolled{padding:12px 5%;}
+
+  .nav-links{display:none;}
+
+  .menu-toggle{display:flex;}
+
+  section{padding:70px 5%;}
+
+  .hero{padding:20px 20px;min-height:100dvh;}
+  .hero h1{font-size:clamp(32px,9vw,52px);}
+  .hero-sub{font-size:14px;}
+  .hero-btns{gap:10px;}
+  .hero-btns .btn,.hero-btns .btn-outline{
+    padding:13px 26px;font-size:14px;
+  }
+
+  .cards{grid-template-columns:1fr;gap:16px;}
+
+  .card{padding:28px 22px;}
+
+  .gallery{
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:14px;
+  }
+  .gallery-card img{height:200px;}
+
+  #gallery{padding:70px 5%;}
+
+  #map-section{padding:60px 5%;}
+  #map-section iframe{height:280px;}
+
+  .footer-inner{grid-template-columns:1fr;gap:28px;}
+  footer{padding:50px 6% 100px;}
+
+  .whatsapp-float{bottom:85px;right:16px;width:52px;height:52px;}
+
+  .sticky-cta{display:block;}
+
+  .pricing-card{padding:28px 22px 24px;}
 }
 
-.whatsapp-float:hover{
-transform:scale(1.12);
-box-shadow:0 18px 55px rgba(0,0,0,0.5);
-}
-
-@keyframes whatsappFloat{
-0%{transform:translateY(0);}
-50%{transform:translateY(-6px);}
-100%{transform:translateY(0);}
+@media(max-width:400px){
+  .hero h1{font-size:30px;}
+  .hero-badge{font-size:11px;letter-spacing:1px;}
+  .gallery{grid-template-columns:1fr;}
 }
 </style>
 </head>
 
 <body>
 
-<div id="loader">
-  <div class="spinner"></div>
-</div>
-  
+<!-- LOADER -->
+<div id="loader"><div class="spinner"></div></div>
 <div id="progress-bar"></div>
-  
-<nav>
 
-<div class="logo">
-<img src="LOGO.png" alt="7 Oceans Resort Logo">
-<span>7 Oceans Resort</span>
-</div>
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo">
+    <img src="LOGO.png" alt="7 Oceans Resort Logo">
+    <span>7 Oceans Resort</span>
+  </a>
 
-<div class="menu-toggle" onclick="toggleMenu()">
-☰
-</div>
+  <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
 
-<div class="nav-links">
-<a href="#about">About</a>
-<a href="#trust">Trust</a>  
-<a href="#stay">Stay</a>
-<a href="#gallery">Gallery</a>
-<a href="#contact">Contact</a>
-</div>
-
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#amenities">Amenities</a>
+    <a href="#stay">Stay</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </div>
 </nav>
 
+<!-- MOBILE FULL-SCREEN NAV -->
+<div class="mobile-nav-overlay" id="mobileNav">
+  <span class="mobile-close" onclick="closeMenu()">✕</span>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#amenities" onclick="closeMenu()">Amenities</a>
+  <a href="#stay" onclick="closeMenu()">Stay</a>
+  <a href="#gallery" onclick="closeMenu()">Gallery</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
 <div class="hero">
-<div style="
-background:rgba(255,255,255,0.15);
-padding:8px 18px;
-border-radius:30px;
-font-size:14px;
-margin-bottom:20px;
-letter-spacing:1px;
-color:white;
-animation:floatBadge 4s ease-in-out infinite;
-">
-
-Where Luxury Meets the Coast
-
-</div>
-<h1>Escape to Coastal Luxury at 7 Oceans Resort</h1>
-
-<p style="
-margin-top:10px;
-font-size:18px;
-color:white;
-text-shadow:0 2px 8px rgba(0,0,0,0.7);
-">
-
-⭐ 4.8 Rated on Google | 120+ Happy Guests
-
-</p>
-
-<p>Luxury Villas • Private Celebrations • Peaceful Coastal Retreat</p>
-
-<a href="#contact" class="btn">Check Availability Now</a>
-
-</div>
-
-<section id="about">
-<h2 class="section-title">The Experience</h2>
-<div class="cards">
-<div class="card">
-<h3>Luxury Villas</h3>
-<p>Architecturally designed villas offering comfort and privacy.</p>
-</div>
-<div class="card">
-<h3>Oceanfront Calm</h3>
-<p>Wake up to sea breeze and golden sunsets.</p>
-</div>
-<div class="card">
-<h3>Private Celebrations</h3>
-<p>Perfect destination for birthdays and retreats.</p>
-</div>
-</div>
-</section>
-
-<section id="trust">
-<h2 class="section-title">Why Choose 7 Oceans Resort</h2>
-<div class="cards">
-<div class="card">
-<h3>Prime Coastal Location</h3>
-<p>Located near Satpati Beach with peaceful surroundings.</p>
-</div>
-<div class="card">
-<h3>Direct Booking Advantage</h3>
-<p>No middlemen. Contact us directly for best rates.</p>
-</div>
-<div class="card">
-<h3>Perfect for Celebrations</h3>
-<p>Birthdays, corporate outings and family getaways.</p>
-</div>
-</div>
-</section>
-
-<section id="amenities">
-
-<h2 class="section-title">Resort Amenities</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Swimming Pool</h3>
-<p>Relax and refresh in our beautiful outdoor pool surrounded by nature.</p>
-</div>
-
-<div class="card">
-<h3>Event Lawn</h3>
-<p>Spacious lawn perfect for birthdays, celebrations and private events.</p>
-</div>
-
-<div class="card">
-<h3>Luxury Villas</h3>
-<p>Comfortable villas designed for couples, families and small groups.</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="stay">
-<h2 class="section-title">Our Villas & Stay Options</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Luxury Floating Villa</h3>
-<p>Private villa with premium interiors, serene views and perfect privacy for couples & small families.</p>
-<p style="margin-top:15px;font-weight:600;color:#00bcd4;">Starting from ₹7,999 / night</p>
-<a href="#contact" class="btn" style="margin-top:15px;">Check Availability</a>
-</div>
-
-<div class="card">
-<h3>Garden View Villa</h3>
-<p>Spacious stay option overlooking lush green lawns, ideal for birthday parties & group stays.</p>
-<p style="margin-top:15px;font-weight:600;color:#00bcd4;">Starting from ₹6,499 / night</p>
-<a href="#contact" class="btn" style="margin-top:15px;">Check Availability</a>
-</div>
-
-<div class="card">
-<h3>Exclusive Full Property Booking</h3>
-<p>Book the entire property for private events, retreats and corporate outings.</p>
-<p style="margin-top:15px;font-weight:600;color:#00bcd4;">Custom Pricing Available</p>
-<a href="#contact" class="btn" style="margin-top:15px;">Enquire Now</a>
-</div>
-
-</div>
-</section>
-  
-<section id="gallery">
-<h2 class="section-title">Moments at 7 Oceans</h2>
-
-<div class="gallery">
-
-<div class="gallery-card" onclick="openGallerySet('villa')">
-  <img src="VILLA.jpg" loading="lazy">
-  <p>Luxury Floating Villa</p>
-</div>
-
-<div class="gallery-card" onclick="openGallerySet('garden')">
-  <img src="LAWN.jpg" loading="lazy">
-  <p>Events & Entertainment</p>
-</div>
-
-<div class="gallery-card" onclick="openGallerySet('property')">
-  <img src="POOL.jpg" loading="lazy">
-  <p>Swimming Pool Fun</p>
-</div>
-
-</div>
-</section>
-
-<section id="trust-proof">
-<h2 class="section-title">Trusted by Families & Corporate Groups</h2>
-<p style="text-align:center;max-width:700px;margin:0 auto;color:#cbd5e1;">
-Families, corporate teams and private groups regularly choose 7 Oceans Resort for exclusive celebrations, weekend escapes and peaceful coastal stays. Our serene setting and personalized hospitality make every visit memorable.
-</p>
-</section>
-
-<section id="google-reviews">
-
-<h2 class="section-title">Guest Experiences</h2>
-
-<p style="text-align:center;margin-bottom:25px;color:#666;">
-Rated 4.8 ⭐ on Google by our happy guests
-</p>
-
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-7f44d34f-54a5-44f6-8f73-32170cceb19b" data-elfsight-app-lazy></div>
-
-</section>
-  
-<section id="contact" class="contact">
-<h2 class="section-title">Begin Your Journey</h2>
-<form action="https://formsubmit.co/muzammilquraishi1786@gmail.com" method="POST">
-<input type="text" name="name" placeholder="Your Name" required>
-<input type="email" name="email" placeholder="Your Email" required>
-<textarea name="message" rows="5" placeholder="Your Message"></textarea>
-<button class="btn" type="submit">Send Enquiry</button>
-</form>
-</section>
-  
-  <section>
-<h2 class="section-title">Find Us Here</h2>
-<iframe 
-src="https://www.google.com/maps?q=7+Oceans+Resort+Palghar&output=embed" 
-width="100%" 
-height="400" 
-style="border:0;border-radius:20px;">
-</iframe>
-</section>
-
-<footer style="background:#f1eae5;padding:50px;text-align:center;color:#333;">
-
-<h2 style="font-family:'Playfair Display',serif;margin-bottom:10px;">
-7 Oceans Beach House Resort
-</h2>
-
-<p>Satpati Road, Palghar, Maharashtra</p>
-
-<p style="margin-top:10px;">
-📞 +91 90215 12392
-</p>
-
-<p style="margin-top:10px;">
-© 2026 7 Oceans Resort
-</p>
-
-</footer>
-
-<!-- Premium Gallery Popup -->
-<div id="galleryModal" class="gallery-modal">
-  <span class="gallery-close" onclick="closeGallery()">&times;</span>
-  
-  <div class="modal-content">
-    <img id="galleryImage" class="gallery-modal-img">
-    
-    <div class="modal-controls">
-      <button onclick="prevImage()">❮</button>
-      <button onclick="nextImage()">❯</button>
-    </div>
-    
+  <div class="hero-badge">Satpati Beach, Palghar · Maharashtra</div>
+  <h1>Escape to Coastal Luxury at 7 Oceans Resort</h1>
+  <p class="hero-sub">Luxury Villas &nbsp;·&nbsp; Private Celebrations &nbsp;·&nbsp; Peaceful Coastal Retreat</p>
+  <p class="hero-rating">⭐ 4.8 Rated on Google &nbsp;|&nbsp; 120+ Happy Guests</p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn">Check Availability</a>
+    <a href="#gallery" class="btn-outline">View Gallery</a>
   </div>
 </div>
 
-<!-- Floating WhatsApp Button -->
+<!-- ABOUT -->
+<section id="about">
+  <h2 class="section-title">The Experience</h2>
+  <div class="cards">
+    <div class="card">
+      <span class="card-icon">🏡</span>
+      <h3>Luxury Villas</h3>
+      <p>Architecturally designed villas offering exceptional comfort, privacy, and curated interiors for a truly memorable stay.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌊</span>
+      <h3>Oceanfront Calm</h3>
+      <p>Wake up to the gentle sea breeze, golden sunrises, and panoramic coastal views right at your doorstep.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🎉</span>
+      <h3>Private Celebrations</h3>
+      <p>The perfect destination for birthdays, anniversaries, corporate retreats and intimate gatherings.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section id="trust">
+  <h2 class="section-title">Why Choose 7 Oceans Resort</h2>
+  <div class="cards">
+    <div class="card">
+      <span class="card-icon">📍</span>
+      <h3>Prime Coastal Location</h3>
+      <p>Located right near Satpati Beach, Palghar — easily accessible from Mumbai yet worlds away from the city rush.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">💸</span>
+      <h3>Direct Booking Advantage</h3>
+      <p>No middlemen. Book directly with us for the best rates, personalised service and flexible packages.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🥂</span>
+      <h3>Perfect for Celebrations</h3>
+      <p>Birthdays, corporate outings, family getaways — we tailor every event to make it unforgettable.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section id="amenities">
+  <h2 class="section-title">Resort Amenities</h2>
+  <div class="cards">
+    <div class="card">
+      <span class="card-icon">🏊</span>
+      <h3>Swimming Pool</h3>
+      <p>Relax and refresh in our beautiful outdoor pool, surrounded by lush greenery and the sounds of nature.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌿</span>
+      <h3>Event Lawn</h3>
+      <p>A spacious, manicured lawn perfect for birthday parties, sundowners, celebrations and private events.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🛏️</span>
+      <h3>Luxury Villas</h3>
+      <p>Thoughtfully designed villas for couples, families and small groups — cosy, elegant and fully equipped.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🎮</span>
+      <h3>Games & Activities</h3>
+      <p>Indoor and outdoor games to keep everyone entertained throughout your stay.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🍽️</span>
+      <h3>In-House Dining</h3>
+      <p>Enjoy freshly prepared meals and snacks served right at the resort for a seamless, relaxing experience.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌅</span>
+      <h3>Scenic Coastal Views</h3>
+      <p>Breathtaking sunset views and peaceful coastal surroundings that rejuvenate your mind and soul.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STAY / PRICING -->
+<section id="stay">
+  <h2 class="section-title">Our Villas & Stay Options</h2>
+  <div class="cards">
+
+    <div class="pricing-card card">
+      <h3>Luxury Floating Villa</h3>
+      <p>Private villa with premium interiors, serene views and perfect privacy — ideal for couples and small families.</p>
+      <div class="price">Starting ₹7,999 / night</div>
+      <a href="#contact" class="btn">Check Availability</a>
+    </div>
+
+    <div class="pricing-card card featured">
+      <div class="featured-tag">Most Popular</div>
+      <h3>Garden View Villa</h3>
+      <p>Spacious stay overlooking lush green lawns — ideal for birthday parties, group stays and weekend getaways.</p>
+      <div class="price">Starting ₹6,499 / night</div>
+      <a href="#contact" class="btn">Check Availability</a>
+    </div>
+
+    <div class="pricing-card card">
+      <h3>Exclusive Full Property</h3>
+      <p>Book the entire property for private retreats, corporate offsites and exclusive celebrations with your group.</p>
+      <div class="price">Custom Pricing</div>
+      <a href="#contact" class="btn">Enquire Now</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <h2 class="section-title">Moments at 7 Oceans</h2>
+  <div class="gallery">
+    <div class="gallery-card" onclick="openGallerySet('villa')">
+      <img src="VILLA.jpg" loading="lazy" alt="Luxury Floating Villa">
+      <div class="gallery-card-label">Luxury Floating Villa</div>
+    </div>
+    <div class="gallery-card" onclick="openGallerySet('garden')">
+      <img src="LAWN.jpg" loading="lazy" alt="Events and Entertainment">
+      <div class="gallery-card-label">Events & Entertainment</div>
+    </div>
+    <div class="gallery-card" onclick="openGallerySet('property')">
+      <img src="POOL.jpg" loading="lazy" alt="Swimming Pool">
+      <div class="gallery-card-label">Swimming Pool</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST PROOF -->
+<section id="trust-proof">
+  <h2 class="section-title">Trusted by Families & Corporate Groups</h2>
+  <p>Families, corporate teams and private groups regularly choose 7 Oceans Resort for exclusive celebrations, weekend escapes and peaceful coastal stays. Our serene setting and personalised hospitality make every visit truly memorable.</p>
+</section>
+
+<!-- GOOGLE REVIEWS -->
+<section id="google-reviews">
+  <h2 class="section-title">Guest Experiences</h2>
+  <p style="text-align:center;margin-bottom:25px;color:var(--muted);font-size:15px;">Rated 4.8 ⭐ on Google by our happy guests</p>
+  <script src="https://elfsightcdn.com/platform.js" async></script>
+  <div class="elfsight-app-7f44d34f-54a5-44f6-8f73-32170cceb19b" data-elfsight-app-lazy></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <h2 class="section-title">Begin Your Journey</h2>
+  <form action="https://formsubmit.co/muzammilquraishi1786@gmail.com" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <input type="tel" name="phone" placeholder="Your Phone Number">
+    <textarea name="message" rows="5" placeholder="Tell us about your stay — dates, group size, occasion..."></textarea>
+    <button class="btn" type="submit">Send Enquiry →</button>
+  </form>
+</section>
+
+<!-- MAP -->
+<section id="map-section">
+  <h2 class="section-title">Find Us Here</h2>
+  <iframe
+    src="https://www.google.com/maps?q=7+Oceans+Resort+Palghar&output=embed"
+    loading="lazy"
+    allowfullscreen
+    referrerpolicy="no-referrer-when-downgrade"
+    title="7 Oceans Resort Location">
+  </iframe>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h2>7 Oceans Beach House Resort</h2>
+      <p>Where coastal luxury meets heartfelt hospitality. Your perfect escape from the city, right on the shores of Palghar.</p>
+      <div class="footer-social" style="margin-top:18px;">
+        <a href="https://www.instagram.com" target="_blank" title="Instagram">📸</a>
+        <a href="https://www.facebook.com" target="_blank" title="Facebook">📘</a>
+        <a href="https://wa.me/919021512392" target="_blank" title="WhatsApp">💬</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#about">About</a>
+      <a href="#amenities">Amenities</a>
+      <a href="#stay">Stay Options</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>📍 Satpati Road, Palghar, Maharashtra</p>
+      <p>📞 +91 90215 12392</p>
+      <p>✉️ muzammilquraishi1786@gmail.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 7 Oceans Resort · All rights reserved · Designed with ♥ in Maharashtra
+  </div>
+</footer>
+
+<!-- GALLERY MODAL -->
+<div id="galleryModal" class="gallery-modal">
+  <span class="gallery-close" onclick="closeGallery()">✕</span>
+  <img id="galleryImage" class="gallery-modal-img" alt="Gallery Image">
+  <div class="modal-controls">
+    <button onclick="prevImage()">❮</button>
+    <button onclick="nextImage()">❯</button>
+  </div>
+</div>
+
+<!-- WHATSAPP FLOAT -->
 <a href="https://wa.me/919021512392?text=Hi%20I%20want%20to%20check%20availability%20at%207%20Oceans%20Resort"
-class="whatsapp-float"
-target="_blank"
-rel="noopener">
-
-<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-
+   class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
 </a>
 
-<script>
-const sections = document.querySelectorAll("section");
+<!-- MOBILE STICKY CTA -->
+<div class="sticky-cta">
+  <a href="#contact">📅 Check Availability Now</a>
+</div>
 
+<script>
+// ─── LOADER ───
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  loader.style.opacity = "0";
+  setTimeout(() => loader.style.display = "none", 500);
+});
+
+// ─── SCROLL PROGRESS + NAV ───
+window.addEventListener("scroll", () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  document.getElementById("progress-bar").style.width = (scrollTop / height * 100) + "%";
+  document.getElementById("navbar").classList.toggle("scrolled", scrollTop > 60);
+});
+
+// ─── SECTION REVEAL ───
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if(entry.isIntersecting){
+    if (entry.isIntersecting) {
       entry.target.classList.add("active");
-
-const cards = entry.target.querySelectorAll(".card");
-cards.forEach((card,index)=>{
-setTimeout(()=>{
-card.style.opacity="1";
-card.style.transform="translateY(0)";
-}, index * 150);
-});
+      entry.target.querySelectorAll(".card, .pricing-card").forEach((card, i) => {
+        setTimeout(() => {
+          card.style.opacity = "1";
+          card.style.transform = "translateY(0)";
+          card.style.transition = "opacity 0.5s ease, transform 0.5s ease, box-shadow 0.4s ease, border-color 0.4s ease";
+        }, i * 120);
+      });
     }
   });
-}, {
-  threshold: 0.15
-});
+}, { threshold: 0.12 });
 
-sections.forEach(section => {
-  observer.observe(section);
-});
-const nav = document.querySelector("nav");
+document.querySelectorAll("section").forEach(s => observer.observe(s));
 
-window.addEventListener("scroll",()=>{
-const scrollTop=document.documentElement.scrollTop;
-const height=document.documentElement.scrollHeight - document.documentElement.clientHeight;
-const progress=(scrollTop/height)*100;
-document.getElementById("progress-bar").style.width=progress+"%";
-
-if(window.scrollY > 50){
-nav.classList.add("scrolled");
-} else {
-nav.classList.remove("scrolled");
+// ─── MOBILE MENU ───
+function toggleMenu() {
+  const nav = document.getElementById("mobileNav");
+  const toggle = document.getElementById("menuToggle");
+  nav.classList.toggle("open");
+  toggle.classList.toggle("open");
+  document.body.style.overflow = nav.classList.contains("open") ? "hidden" : "";
 }
+
+function closeMenu() {
+  document.getElementById("mobileNav").classList.remove("open");
+  document.getElementById("menuToggle").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+// Close mobile nav on outside click
+document.getElementById("mobileNav").addEventListener("click", function(e) {
+  if (e.target === this) closeMenu();
 });
 
-window.addEventListener("load",()=>{
-const loader = document.getElementById("loader");
-loader.style.opacity = "0";
-loader.style.transition = "opacity 0.5s ease";
-setTimeout(()=>{
-loader.style.display="none";
-},500);
-});
-
-let currentImages = [];
-let currentIndex = 0;
-
+// ─── GALLERY ───
 const imageSets = {
-  villa: ["VILLA.jpg", "HERO.jpg", "VILLA2.jpeg", "VILLAS.webp", "VILLABT1.jpeg", "VILLA3.jpg", "VILLA4.jpeg", "VILLA BT2.jpeg", "VILLA5.webp", "VILLA6.webp", "VILLA BT3.jpeg", "VILLA7.webp", "VILLA8.webp"],
-  garden: ["LAWN.jpg", "GAMES2.jpg", "GAMES1.jpg", "EVENT1.jpg", "EVENT2.heic", "EVENT3.heic", "EVENT4.heic"],
-  property: ["POOL.jpg", "POOL2.jpeg", "POOL3.jpeg", "POOL4.jpg", "POOL5.webp", "POOL6.webp", "POOL7.webp", "POOL8.webp"]
+  villa:    ["VILLA.jpg","HERO.jpg","VILLA2.jpeg","VILLAS.webp","VILLABT1.jpeg","VILLA3.jpg","VILLA4.jpeg","VILLA BT2.jpeg","VILLA5.webp","VILLA6.webp","VILLA BT3.jpeg","VILLA7.webp","VILLA8.webp"],
+  garden:   ["LAWN.jpg","GAMES2.jpg","GAMES1.jpg","EVENT1.jpg","EVENT2.heic","EVENT3.heic","EVENT4.heic"],
+  property: ["POOL.jpg","POOL2.jpeg","POOL3.jpeg","POOL4.jpg","POOL5.webp","POOL6.webp","POOL7.webp","POOL8.webp"]
 };
 
-function openGallerySet(type){
+let currentImages = [], currentIndex = 0;
+
+function openGallerySet(type) {
   currentImages = imageSets[type];
   currentIndex = 0;
   document.getElementById("galleryImage").src = currentImages[currentIndex];
-  document.getElementById("galleryModal").style.display = "flex";
+  document.getElementById("galleryModal").classList.add("open");
+  document.body.style.overflow = "hidden";
 }
-
-function nextImage(){
+function nextImage() {
   currentIndex = (currentIndex + 1) % currentImages.length;
   document.getElementById("galleryImage").src = currentImages[currentIndex];
 }
-
-function prevImage(){
+function prevImage() {
   currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
   document.getElementById("galleryImage").src = currentImages[currentIndex];
 }
-
-function closeGallery(){
-  document.getElementById("galleryModal").style.display = "none";
+function closeGallery() {
+  document.getElementById("galleryModal").classList.remove("open");
+  document.body.style.overflow = "";
 }
 
-window.addEventListener("keydown", function(e){
-  if(e.key === "Escape"){
-    closeGallery();
-  }
+// Keyboard navigation
+window.addEventListener("keydown", e => {
+  if (e.key === "Escape") { closeGallery(); closeMenu(); }
+  if (e.key === "ArrowRight") nextImage();
+  if (e.key === "ArrowLeft") prevImage();
 });
 
-function toggleMenu(){
-const menu = document.querySelector(".nav-links");
-
-if(menu.style.display === "flex"){
-menu.style.display = "none";
-}else{
-menu.style.display = "flex";
-}
-}
+// Swipe support for gallery on mobile
+let touchStartX = 0;
+document.getElementById("galleryModal").addEventListener("touchstart", e => {
+  touchStartX = e.touches[0].clientX;
+});
+document.getElementById("galleryModal").addEventListener("touchend", e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) diff > 0 ? nextImage() : prevImage();
+});
 </script>
 
 </body>
