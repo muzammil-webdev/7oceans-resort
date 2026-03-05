@@ -293,28 +293,26 @@ margin-top:60px;
 
 /* MOBILE NAV FIX */
 @media(max-width:768px){
+
 nav{
-flex-direction:column;
-gap:10px;
+flex-direction:row;
+padding:15px 5%;
 }
 
 nav div:last-child{
 display:flex;
-flex-wrap:wrap;
-justify-content:center;
+flex-wrap:nowrap;
 }
 
 nav a{
-margin:8px;
+margin-left:15px;
+font-size:12px;
 }
 
 .hero{
-height:auto;
-min-height:calc(100vh - 140px);
-padding:40px 20px 60px 20px;
-justify-content:flex-start;
+padding:20px;
 }
-  
+
 }
 #loader{
 position:fixed;
