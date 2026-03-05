@@ -293,18 +293,33 @@ margin-top:60px;
 
 /* MOBILE NAV FIX */
 @media(max-width:768px){
-nav{
+
+.menu-toggle{
+display:block;
+}
+
+.nav-links{
+display:none;
 flex-direction:column;
-gap:10px;
+width:100%;
+text-align:center;
+margin-top:10px;
 }
-nav div:last-child{
-display:flex;
+
+.nav-links a{
+display:block;
+margin:12px 0;
+font-size:16px;
+}
+
+nav{
 flex-wrap:wrap;
-justify-content:center;
 }
-nav a{
-margin:8px;
+
+.hero{
+padding-top:120px;
 }
+
 }
 #loader{
 position:fixed;
@@ -385,6 +400,14 @@ text-shadow:0 2px 8px rgba(0,0,0,0.6);
 .logo img{
 height:50px;
 width:auto;
+}
+
+.menu-toggle{
+display:none;
+font-size:30px;
+color:white;
+cursor:pointer;
+text-shadow:0 2px 8px rgba(0,0,0,0.6);
 }
 
 .gallery-modal{
@@ -503,18 +526,24 @@ box-shadow:0 18px 55px rgba(0,0,0,0.5);
 <div id="progress-bar"></div>
   
 <nav>
+
 <div class="logo">
   <img src="LOGO.png" alt="7 Oceans Resort Logo">
   <span>7 Oceans Resort</span>
 </div>
-  
-<div>
+
+<div class="menu-toggle" onclick="toggleMenu()">
+☰
+</div>
+
+<div class="nav-links">
 <a href="#about">About</a>
 <a href="#trust">Trust</a>  
 <a href="#stay">Stay</a>
 <a href="#gallery">Gallery</a>
 <a href="#contact">Contact</a>
 </div>
+
 </nav>
 
 <div class="hero">
@@ -831,6 +860,16 @@ window.addEventListener("keydown", function(e){
     closeGallery();
   }
 });
+
+function toggleMenu(){
+const menu = document.querySelector(".nav-links");
+
+if(menu.style.display === "flex"){
+menu.style.display = "none";
+}else{
+menu.style.display = "flex";
+}
+}
 </script>
 
 </body>
