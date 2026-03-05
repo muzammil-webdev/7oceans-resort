@@ -148,7 +148,8 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
 
 .btn:hover{
 background:var(--primary-dark);
-transform:translateY(-3px);
+transform:translateY(-3px) scale(1.03);
+box-shadow:0 15px 35px rgba(0,0,0,0.35);
 }
 
 /* SECTION */
@@ -365,6 +366,12 @@ transform:translateY(0);
 }
 } 
 
+@keyframes floatBadge{
+0%{transform:translateY(0);}
+50%{transform:translateY(-6px);}
+100%{transform:translateY(0);}
+}
+
 .logo{
 display:flex;
 align-items:center;
@@ -518,6 +525,7 @@ border-radius:30px;
 font-size:14px;
 margin-bottom:20px;
 letter-spacing:1px;
+animation:floatBadge 4s ease-in-out infinite;
 ">
 
 Where Luxury Meets the Coast
