@@ -119,25 +119,8 @@ section.active{opacity:1;transform:translateY(0);}
 #trust-proof p{text-align:center;max-width:680px;margin:0 auto;color:var(--text);font-size:16px;line-height:1.9;}
 
 /* CONTACT */
-#contact{
-  position:relative;
-  overflow:hidden;
-}
-#contact::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:url('HERO3.webp') center/cover no-repeat;
-  opacity:0.13;
-  z-index:0;
-}
-#contact .section-title,
-#contact form{
-  position:relative;
-  z-index:1;
-}
 .contact form{display:flex;flex-direction:column;max-width:520px;margin:0 auto;gap:16px;}
-.contact input,.contact textarea{padding:14px 18px;border-radius:12px;border:1.5px solid rgba(0,0,0,0.12);font-size:15px;font-family:'DM Sans',sans-serif;background:rgba(255,255,255,0.92);color:var(--dark);transition:border 0.3s,box-shadow 0.3s;width:100%;}
+.contact input,.contact textarea{padding:14px 18px;border-radius:12px;border:1.5px solid rgba(0,0,0,0.12);font-size:15px;font-family:'DM Sans',sans-serif;background:white;color:var(--dark);transition:border 0.3s,box-shadow 0.3s;width:100%;}
 .contact input:focus,.contact textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(167,133,106,0.15);}
 .contact textarea{resize:vertical;}
 .contact .btn{width:100%;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;}
@@ -448,7 +431,7 @@ footer{background:#1a1510;padding:60px 8% 40px;color:rgba(255,255,255,0.8);}
       <h4>Contact</h4>
       <p>Satpati Road, Palghar, Maharashtra</p>
       <p>+91 90215 12392</p>
-      <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c4159564d414145405d595e4d455f44451d1b141a6c4b414d4540024f4341">[email&#160;protected]</a></p>
+      <p>muzammilquraishi1786@gmail.com</p>
     </div>
   </div>
   <div class="footer-bottom">
@@ -476,7 +459,7 @@ footer{background:#1a1510;padding:60px 8% 40px;color:rgba(255,255,255,0.8);}
   <a href="#contact">Check Availability Now</a>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   loader.style.opacity = "0";
@@ -555,4 +538,12 @@ window.addEventListener("keydown", e => {
 });
 let touchStartX = 0;
 document.getElementById("galleryModal").addEventListener("touchstart", e => {
-  touchStartX = e.touches[0].c
+  touchStartX = e.touches[0].clientX;
+});
+document.getElementById("galleryModal").addEventListener("touchend", e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) diff > 0 ? nextImage() : prevImage();
+});
+</script>
+</body>
+</html>
